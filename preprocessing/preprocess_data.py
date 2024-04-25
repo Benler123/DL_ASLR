@@ -229,9 +229,6 @@ def preprocess_data():
     mask = [x.shape == X_train[0].shape for x in X_train]
     X_train = [x for m, x in zip(mask, X_train) if m]
     y_train = [y for m, y in zip(mask, y_train) if m]
-    for i, _ in enumerate(mask):
-        if not i:
-            print(_)
     X_train = np.array(X_train)
     np.save(f'preprocessing/X_train{SEQUENCE_NUM}.npy', X_train)
     np.save(f'preprocessing/y_train{SEQUENCE_NUM}.npy', y_train)

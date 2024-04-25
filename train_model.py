@@ -5,13 +5,17 @@ import torch.optim as optim
 import models.base_nn as base_nn
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
+import contextlib
+from torchsummary import summary
+
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-EPOCHS=10
+EPOCHS=1
 BATCH_SIZE=32
 EXPERIMENT_NAME='nn_baseline'
+LEARNING_RATE=0.0001
 
 def load_data():
     try:
@@ -48,7 +52,7 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
             epoch_train_acc.append(train_acc)
         loss_list.append(sum(epoch_loss) / len(epoch_loss))
         train_acc_list.append(sum(epoch_train_acc) / len(epoch_train_acc))
-        print(f'Epoch {epoch} Loss {loss_list[-1]} Accuracy {train_acc_list[-1]}')
+        print(f'Epoch {epoch + 1} Loss {loss_list[-1]} Accuracy {train_acc_list[-1]}')
     return model, loss_list, train_acc_list
 
 def test_model(model, X_test, y_test, criterion):
@@ -79,8 +83,12 @@ def generate_save_plots(experiment_name, loss, accuracy):
     plt.ylabel('loss')
     plt.savefig(f'{experiment_name}_train_loss.png')
 
-if __name__ == '__main__':
+def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
+    with open(f'{experiment_name}_summary.txt', 'w') as f:
+        with contextlib.redirect_stdout(f):
+            print(summary(model, input_shape))
 
+if __name__ == '__main__':
     X_data, y_data = load_data()
     X_train, X_test, y_train, y_test =  train_test_split(X_data, y_data, test_size=0.2)
 
@@ -95,8 +103,9 @@ if __name__ == '__main__':
     NN_model = base_nn.NN_model(len(X_train[0]) * 2, len(y_train[1]))
     NN_model.to(device)
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(NN_model.parameters(), lr=0.0001)
+    optimizer = optim.Adam(NN_model.parameters(), lr=LEARNING_RATE)
     model, loss, accuracy = train_model(NN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
+    summarize_model(model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
     test_model(model, X_test, y_test, criterion)
     generate_save_plots(EXPERIMENT_NAME, loss, accuracy)
 
