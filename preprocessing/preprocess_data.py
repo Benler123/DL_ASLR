@@ -11,6 +11,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from sklearn.preprocessing import OneHotEncoder
 
 NUM_FRAMES=60
+SEQUENCE_NUM = 3
 
 '''
 Methods to either upsample or downsample frames to return NUM_FRAMES freams
@@ -128,6 +129,15 @@ def sample_parquets(data_file, n=10000):
     one_hot_labels = onehot_encode(label_indexes, 250)
     return data, one_hot_labels
 
+def sequential_sample_parquets(data_file, start, end):
+    labels_mapping_dict = labels_mapping('kaggle/input/asl-signs/train.csv', 'sequence_id', 'sign')
+    indices = range(start, min(len(data_file), end))
+    data = [data_file[i] for i in indices]
+    labels = [labels_mapping_dict[d.split('/')[-1].split('.')[0]] for d in data]
+    label_indexes = convert_labels_to_indexes(labels)
+    one_hot_labels = onehot_encode(label_indexes, 250)
+    return data, one_hot_labels
+
 def convert_labels_to_indexes(labels):
     '''
     map each sign to an index. This is useful for training the model
@@ -212,13 +222,19 @@ def normalize_coords(coords):
 def preprocess_data():
     print('Preprocessing data...')
     data_files = glob("kaggle/input/asl-signs/train_landmark_files/*/*.parquet", recursive=True)
-    X_train, y_train = sample_parquets(data_files, 1000)
+    X_train, y_train = sequential_sample_parquets(data_files, 10000 * SEQUENCE_NUM, 10000 *  (SEQUENCE_NUM + 1))
     X_train = process_data(X_train)
     X_train = mask_nan_hand(X_train)
     X_train = [normalize_coords(replace_nan(x)) for x in X_train]
+    mask = [x.shape == X_train[0].shape for x in X_train]
+    X_train = [x for m, x in zip(mask, X_train) if m]
+    y_train = [y for m, y in zip(mask, y_train) if m]
+    for i, _ in enumerate(mask):
+        if not i:
+            print(_)
     X_train = np.array(X_train)
-    np.save('preprocessing/X_train.npy', X_train)
-    np.save('preprocessing/y_train.npy', y_train)
+    np.save(f'preprocessing/X_train{SEQUENCE_NUM}.npy', X_train)
+    np.save(f'preprocessing/y_train{SEQUENCE_NUM}.npy', y_train)
     
             
 
