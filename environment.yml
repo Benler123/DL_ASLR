@@ -3,6 +3,7 @@ channels:
   - defaults
 dependencies:
   - python == 3.10
+  - pip
   - pip:
     - contourpy==1.2.1
     - cycler==0.12.1
@@ -33,3 +34,4 @@ dependencies:
     - torchvision
     - typing_extensions==4.11.0
     - tzdata==2024.1
+    - torchsummary
