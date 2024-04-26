@@ -19,8 +19,8 @@ LEARNING_RATE=0.0001
 
 def load_data():
     try:
-        X_train = np.load('preprocessing/X_train_combined.npy')
-        y_train = np.load('preprocessing/y_train_combined.npy')
+        X_train = np.load('scratch/X_train_combined.npy')
+        y_train = np.load('scratch/y_train_combined.npy')
     except:
         print('Data not found. Please run the preprocessing script first.')
         raise Exception('Data not found')
