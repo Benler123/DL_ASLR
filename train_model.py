@@ -11,8 +11,7 @@ from torchsummary import summary
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-
-EPOCHS=1
+EPOCHS=10
 BATCH_SIZE=32
 EXPERIMENT_NAME='nn_baseline'
 LEARNING_RATE=0.0001
