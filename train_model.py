@@ -68,7 +68,8 @@ def test_model(model, X_test, y_test, criterion):
 
 def generate_save_plots(experiment_name, loss, accuracy):
     plt.figure()
-    plt.plot(accuracy)
+    accuracy_cpu = [acc.cpu().numpy() for acc in accuracy]  # Convert tensors to NumPy arrays
+    plt.plot(accuracy_cpu)
     plt.title('Training Accuracy')
     plt.legend(['train'], loc='upper left')
     plt.xlabel('epoch')
