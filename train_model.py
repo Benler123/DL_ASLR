@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import models.base_nn as base_nn
+from models.ltsm import LSTM_model
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import contextlib
@@ -15,6 +16,10 @@ EPOCHS=10
 BATCH_SIZE=32
 EXPERIMENT_NAME='nn_baseline'
 LEARNING_RATE=0.0001
+
+HIDDEN_SIZE = 256
+NUM_LAYERS = 2
+
 
 def load_data():
     try:
@@ -36,7 +41,7 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
             y_batch = y_train[i:i+batch_size, :]
             X_batch = torch.tensor(X_batch, dtype=torch.float32).to(device)
             y_batch = torch.tensor(y_batch, dtype=torch.float32).to(device)
-            X_batch = X_batch.view(X_batch.shape[0], -1, X_batch.shape[1] * X_batch.shape[2])
+            # X_batch = X_batch.view(X_batch.shape[0], -1, X_batch.shape[1] * X_batch.shape[2])
             optimizer.zero_grad()
 
             output = model(X_batch).squeeze()
@@ -57,7 +62,7 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
 def test_model(model, X_test, y_test, criterion):
     X_test = torch.tensor(X_test, dtype=torch.float32).to(device)
     y_test = torch.tensor(y_test, dtype=torch.float32).to(device)
-    X_test = X_test.view(X_test.shape[0], -1, X_test.shape[1] * X_test.shape[2])
+    # X_test = X_test.view(X_test.shape[0], -1, X_test.shape[1] * X_test.shape[2])
     output = model(X_test).squeeze()
     y_pred_test = torch.argmax(output, dim=1)
     y_actual_labels = torch.argmax(y_test, dim=1)
@@ -102,10 +107,15 @@ if __name__ == '__main__':
 
     NN_model = base_nn.NN_model(len(X_train[0]) * 2, len(y_train[1]))
     NN_model.to(device)
+    LSTM_model = LSTM_model(input_dims=len(X_train[0][0]) * 2, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, output_classes=len(y_train[0]))
+    LSTM_model.to(device)
+
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(NN_model.parameters(), lr=LEARNING_RATE)
-    model, loss, accuracy = train_model(NN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
-    summarize_model(model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
+    optimizer = optim.Adam(LSTM_model.parameters(), lr=LEARNING_RATE)
+    # model, loss, accuracy = train_model(NN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
+    model, loss, accuracy = train_model(LSTM_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
+    # summarize_model(model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
+    summarize_model(LSTM_model, (BATCH_SIZE, X_train.shape[1], X_train.shape[2] * 2), f'{EXPERIMENT_NAME}')
     test_model(model, X_test, y_test, criterion)
     generate_save_plots(EXPERIMENT_NAME, loss, accuracy)
 
