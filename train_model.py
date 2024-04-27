@@ -12,7 +12,7 @@ from torchsummary import summary
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-EPOCHS=1
+EPOCHS=10
 BATCH_SIZE=32
 EXPERIMENT_NAME='nn_baseline'
 LEARNING_RATE=0.0001
@@ -102,7 +102,7 @@ if __name__ == '__main__':
 
     NN_model = base_nn.NN_model(len(X_train[0]) * 2, len(y_train[1]))
     NN_model.to(device)
-    criterion = nn.CrobrossEntropyLoss()
+    criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(NN_model.parameters(), lr=LEARNING_RATE)
     model, loss, accuracy = train_model(NN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
     summarize_model(model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
