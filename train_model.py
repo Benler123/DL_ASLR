@@ -107,15 +107,15 @@ if __name__ == '__main__':
 
     NN_model = base_nn.NN_model(len(X_train[0]) * 2, len(y_train[1]))
     NN_model.to(device)
-    LSTM_model = LSTM_model(input_dims=len(X_train[0][0]) * 2, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, output_classes=len(y_train[0]))
+    input_dims = X_train.shape[-1]
+    LSTM_model = LSTM_model(input_dims=input_dims, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, output_classes=len(y_train[0]))
     LSTM_model.to(device)
 
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(LSTM_model.parameters(), lr=LEARNING_RATE)
     # model, loss, accuracy = train_model(NN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
     model, loss, accuracy = train_model(LSTM_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
-    # summarize_model(model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
-    summarize_model(LSTM_model, (BATCH_SIZE, X_train.shape[1], X_train.shape[2] * 2), f'{EXPERIMENT_NAME}')
+    summarize_model(model, (BATCH_SIZE, X_train.shape[1], X_train.shape[2] * 2), f'{EXPERIMENT_NAME}')
     test_model(model, X_test, y_test, criterion)
     generate_save_plots(EXPERIMENT_NAME, loss, accuracy)
 
