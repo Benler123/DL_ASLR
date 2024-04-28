@@ -1,7 +1,7 @@
 import os
 import numpy as np
 
-data_indexes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+data_indexes = ["0-30000", "30000-60000", "60000-80000"]
 
 def concat_data(data_indexes=data_indexes):
     X_train = []
@@ -19,7 +19,7 @@ def concat_data(data_indexes=data_indexes):
 
 
 if __name__ == '__main__':
-    # concat_data()
+    concat_data()
     x = np.load('preprocessing/X_train_combined.npy')
     y = np.load('preprocessing/y_train_combined.npy')
     print(x.shape, y.shape)
