@@ -16,16 +16,17 @@ from torchsummary import summary
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-EPOCHS=2
+EPOCHS=10
 BATCH_SIZE=32
 MODEL_NAME = "LSTM"
-EXPERIMENT_NAME='lstm_reg'
-LEARNING_RATE=0.0001
+EXPERIMENT_NAME='lstm_double'
+LEARNING_RATE=0.001
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
 HIDDEN_SIZE = 256
 NUM_LAYERS = 2
-WEIGHT_DECAY = 0.0001
+WEIGHT_DECAY = 0.01
+DROPOUT_PROB = 0.5
 
 
 logger = logging.getLogger(__name__)
@@ -141,7 +142,7 @@ if __name__ == '__main__':
 
     NN_model = base_nn.NN_model(X_train.shape[1] * X_train.shape[2], len(y_train[1])).to(device)
 
-    LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, weight_decay=WEIGHT_DECAY, output_classes=len(y_train[0])).to(device)
+    LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, weight_decay=WEIGHT_DECAY, dropout_prob=DROPOUT_PROB, output_classes=len(y_train[0])).to(device)
 
     CNN_model = cnn_1d_v2.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0])).to(device)
 
