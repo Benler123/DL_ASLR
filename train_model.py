@@ -11,6 +11,9 @@ from sklearn.model_selection import train_test_split
 import contextlib
 import logging
 from torchsummary import summary
+import gc
+
+
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -131,6 +134,9 @@ def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
         
 
 if __name__ == '__main__':
+    gc.collect()
+    torch.cuda.empty_cache()
+    
     X_train, y_train = load_data()
     X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
 
