@@ -18,8 +18,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 EPOCHS=1
 BATCH_SIZE=32
-MODEL_NAME = "LSTM"
-EXPERIMENT_NAME='lstm_LR=0.0005'
+MODEL_NAME = "NN"
+EXPERIMENT_NAME='NN_1'
 LEARNING_RATE=0.0005
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
@@ -40,8 +40,8 @@ logger.addHandler(handler)
 
 def load_data():
     try:
-        X_train = np.load('scratch/X_train_combined.npy')
-        y_train = np.load('scratch/y_train_combined.npy')
+        X_train = np.load('../scratch/X_train_combined.npy')
+        y_train = np.load('../scratch/y_train_combined.npy')
     except:
         print('Data not found. Please run the preprocessing script first.')
         raise Exception('Data not found')
@@ -110,12 +110,15 @@ def generate_save_plots(experiment_name, loss, accuracy):
     plt.savefig(f'{experiment_name}_train_loss.png')
 
 def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
-    logger.info(summary(model, input_shape))
+    with open(f'{experiment_name}.log', 'a') as f:
+        with contextlib.redirect_stdout(f):
+            summary(model, input_shape)
+        
 
 if __name__ == '__main__':
     X_train, y_train = load_data()
     X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
-    
+
     
     logger.info(f'X_train shape: {X_train.shape}')
     logger.info(f'y_train shape: {y_train.shape}')
