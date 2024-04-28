@@ -59,7 +59,7 @@ Deep Learning CS 7643 Group Project
 ### One Time Data Download
 
 - Download the preprocessed data using [this link](https://www.dropbox.com/scl/fo/1tkb34i2xyjyl0xkdfmbj/ABjD3H-uKgYVivLEv8dMvjw?rlkey=t13vd2v643wjv8fy0vu0p6xo8&dl=0). Put this in your scratch directory. 
-- You can alternatively download the data locally by running `python3 preprocessing.py` and transfer to your scratch directory in PACE.
+- Alternatively, you can download the original data  by running `python3 download_data.py` **locally** (~50 GB). Then, you can run `python3 preprocess_data.py` to generate the preprocessed data (~2GB) and transfer to your scratch directory.
 
 ### Load Anaconda, allocate resources 
 
