@@ -17,7 +17,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 EPOCHS=1
 BATCH_SIZE=32
-EXPERIMENT_NAME='cnn_1d'
+MODEL_NAME = "NN"
+EXPERIMENT_NAME='base_nn'
 LEARNING_RATE=0.0001
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
@@ -26,13 +27,13 @@ NUM_LAYERS = 2
 
 def load_data():
     try:
-        X_train_flat = np.load('../scratch/X_train_combined.npy')
+        X_train = np.load('../scratch/X_train_combined.npy')
         y_train = np.load('../scratch/y_train_combined.npy')
     except:
         print('Data not found. Please run the preprocessing script first.')
         raise Exception('Data not found')
-
-    X_train = X_train_flat.reshape(-1, NUM_FRAMES, NUM_LANDMARKS, 2)
+    if MODEL_NAME == "CNN" or MODEL_NAME == "LSTM": 
+        X_train = X_train.reshape(-1, NUM_FRAMES, NUM_LANDMARKS, 2)
     return X_train, y_train
 
 def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_size):
@@ -46,7 +47,8 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
             y_batch = y_train[i:i+batch_size, :]
             X_batch = torch.tensor(X_batch, dtype=torch.float32).to(device)
             y_batch = torch.tensor(y_batch, dtype=torch.float32).to(device)
-            # X_batch = X_batch.view(X_batch.shape[0], -1, X_batch.shape[1] * X_batch.shape[2])
+            if MODEL_NAME == "NN": 
+                X_batch = X_batch.view(X_batch.shape[0], -1, X_batch.shape[1] * X_batch.shape[2])
             optimizer.zero_grad()
 
             output = model(X_batch).squeeze()
@@ -67,7 +69,8 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
 def test_model(model, X_test, y_test, criterion):
     X_test = torch.tensor(X_test, dtype=torch.float32).to(device)
     y_test = torch.tensor(y_test, dtype=torch.float32).to(device)
-    # X_test = X_test.view(X_test.shape[0], -1, X_test.shape[1] * X_test.shape[2])
+    if MODEL_NAME == "NN": 
+        X_test = X_test.view(X_test.shape[0], -1, X_test.shape[1] * X_test.shape[2])
     output = model(X_test).squeeze()
     y_pred_test = torch.argmax(output, dim=1)
     y_actual_labels = torch.argmax(y_test, dim=1)
@@ -76,7 +79,7 @@ def test_model(model, X_test, y_test, criterion):
     print(f'Test Loss {loss.item()} Accuracy {test_acc}')
 
 def generate_save_plots(experiment_name, loss, accuracy):
-    accuracy = accuracy.cpu()
+    accuracy = [acc.cpu().numpy() for acc in accuracy]
     plt.figure()
     plt.plot(accuracy)
     plt.title('Training Accuracy')
@@ -110,7 +113,6 @@ if __name__ == '__main__':
     print(f'X_test shape: {X_test.shape}')
     print(f'y_test shape: {y_test.shape}')
 
-
     NN_model = base_nn.NN_model(len(X_train[0]) * 2, len(y_train[1])).to(device)
 
     LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, output_classes=len(y_train[0])).to(device)
@@ -118,11 +120,11 @@ if __name__ == '__main__':
     CNN_model = cnn_1d_v2.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0])).to(device)
 
     current_model = None
-    if EXPERIMENT_NAME == "cnn_1d": 
+    if MODEL_NAME == "CNN": 
         current_model = CNN_model
-    if EXPERIMENT_NAME == "base_nn": 
+    if MODEL_NAME == "NN": 
         current_model = NN_model
-    if EXPERIMENT_NAME == "lstm": 
+    if MODEL_NAME == "LSTM": 
         current_model = LSTM_model
         
     criterion = nn.CrossEntropyLoss()
@@ -130,6 +132,8 @@ if __name__ == '__main__':
     trained_model, loss, accuracy = train_model(current_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
     test_model(trained_model, X_test, y_test, criterion)
     generate_save_plots(EXPERIMENT_NAME, loss, accuracy)
+    if MODEL_NAME == "NN": 
+        summarize_model(trained_model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
     
     # optimizer = optim.Adam(NN_model.parameters(), lr=LEARNING_RATE)
     # model, loss, accuracy = train_model(NN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
