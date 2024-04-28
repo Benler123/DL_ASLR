@@ -15,10 +15,10 @@ from torchsummary import summary
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-EPOCHS=25
+EPOCHS=2
 BATCH_SIZE=32
-MODEL_NAME = "LSTM"
-EXPERIMENT_NAME='lstm_baseline'
+MODEL_NAME = "NN"
+EXPERIMENT_NAME='test'
 LEARNING_RATE=0.0001
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
@@ -77,24 +77,28 @@ def test_model(model, X_test, y_test, criterion):
     test_acc = (y_pred_test == y_actual_labels).float().mean()
     loss = criterion(output, y_test)
     print(f'Test Loss {loss.item()} Accuracy {test_acc}')
-
-def generate_save_plots(experiment_name, loss, accuracy):
-    accuracy = [acc.cpu().numpy() for acc in accuracy]
+    return test_acc, loss
+    
+def generate_save_plots(experiment_name, train_loss, test_loss, train_accuracy, test_accuracy):
+    train_accuracy = [acc.cpu().numpy() for acc in train_accuracy]
+    
     plt.figure()
-    plt.plot(accuracy)
-    plt.title('Training Accuracy')
-    plt.legend(['train'], loc='upper left')
+    plt.plot(train_accuracy)
+    plt.axhline(y=test_accuracy.detach().cpu().numpy(), color='r', linestyle='-', label='Test Accuracy')
+    plt.title('Training and Test Accuracy')
+    plt.legend(['Train', 'Test'], loc='upper left')
     plt.xlabel('epoch')
     plt.ylabel('accuracy')
-    plt.savefig(f'{experiment_name}_train_acc.png')
+    plt.savefig(f'{experiment_name}_train_test_acc.png')
 
     plt.figure()
-    plt.plot(loss)
-    plt.title('Training Loss')
-    plt.legend(['train'], loc='upper right')
+    plt.plot(train_loss, label='Train Loss')
+    plt.axhline(y=test_loss.detach().cpu().numpy(), color='r', linestyle='-', label='Test Loss')
+    plt.title('Training and Test Loss')
+    plt.legend(loc='upper right')
     plt.xlabel('epoch')
     plt.ylabel('loss')
-    plt.savefig(f'{experiment_name}_train_loss.png')
+    plt.savefig(f'{experiment_name}_train_test_loss.png')
 
 def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
     with open(f'{experiment_name}_summary.txt', 'w') as f:
@@ -129,9 +133,9 @@ if __name__ == '__main__':
         
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(current_model.parameters(), lr=LEARNING_RATE)
-    trained_model, loss, accuracy = train_model(current_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
-    test_model(trained_model, X_test, y_test, criterion)
-    generate_save_plots(EXPERIMENT_NAME, loss, accuracy)
+    trained_model, train_loss, train_accuracy = train_model(current_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
+    test_acc, test_loss = test_model(trained_model, X_test, y_test, criterion)
+    generate_save_plots(EXPERIMENT_NAME, train_loss=train_loss, train_accuracy=train_accuracy, test_accuracy=test_acc, test_loss=test_loss)
     if MODEL_NAME == "NN": 
         summarize_model(trained_model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
     if MODEL_NAME == "CNN": 
