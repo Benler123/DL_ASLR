@@ -180,7 +180,7 @@ if __name__ == '__main__':
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(current_model.parameters(), lr=LEARNING_RATE)
     trained_model, train_loss, train_accuracy = train_model(current_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
-    test_acc, test_loss = test_model(trained_model, X_test, y_test, criterion)
+    test_acc, test_loss = test_model(trained_model, X_test, y_test, criterion, BATCH_SIZE)
     generate_save_plots(EXPERIMENT_NAME, train_loss=train_loss, train_accuracy=train_accuracy, test_accuracy=test_acc, test_loss=test_loss)
     if MODEL_NAME == "NN": 
         summarize_model(trained_model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
