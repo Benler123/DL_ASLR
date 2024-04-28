@@ -29,13 +29,13 @@ NUM_LANDMARKS = 21
 HIDDEN_SIZE = 256
 NUM_LAYERS = 2
 WEIGHT_DECAY = 0.001
-DROPOUT_PROB = 0.5
+DROPOUT_PROB = 0.7
 
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
-handler = logging.FileHandler(f'{EXPERIMENT_NAME}.log')
+handler = logging.FileHandler(f'/logs/{EXPERIMENT_NAME}.log')
 handler.setLevel(logging.INFO)
 
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -132,7 +132,7 @@ def generate_save_plots(experiment_name, train_loss, test_loss, train_accuracy, 
     plt.legend(['Train', 'Test'], loc='upper left')
     plt.xlabel('epoch')
     plt.ylabel('accuracy')
-    plt.savefig(f'{experiment_name}_train_acc.png')
+    plt.savefig(f'graphs/{experiment_name}_train_acc.png')
 
     plt.figure()
     plt.plot(train_loss, label='Train Loss')
@@ -141,7 +141,7 @@ def generate_save_plots(experiment_name, train_loss, test_loss, train_accuracy, 
     plt.legend(loc='upper right')
     plt.xlabel('epoch')
     plt.ylabel('loss')
-    plt.savefig(f'{experiment_name}_train_loss.png')
+    plt.savefig(f'graphs/{experiment_name}_train_loss.png')
 
 def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
     with open(f'{experiment_name}.log', 'a') as f:
