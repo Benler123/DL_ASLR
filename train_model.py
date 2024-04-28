@@ -128,20 +128,20 @@ def generate_save_plots(experiment_name, train_loss, test_loss, train_accuracy, 
     plt.figure()
     plt.plot(train_accuracy)
     plt.axhline(y=test_accuracy, color='r', linestyle='-', label='Test Accuracy')
-    plt.title('Training and Test Accuracy')
+    plt.title(f'{experiment_name} Training Accuracy')
     plt.legend(['Train', 'Test'], loc='upper left')
     plt.xlabel('epoch')
     plt.ylabel('accuracy')
-    plt.savefig(f'{experiment_name}_train_test_acc.png')
+    plt.savefig(f'{experiment_name}_train_acc.png')
 
     plt.figure()
     plt.plot(train_loss, label='Train Loss')
     plt.axhline(y=test_loss, color='r', linestyle='-', label='Test Loss')
-    plt.title('Training and Test Loss')
+    plt.title(f'{experiment_name} Training Loss')
     plt.legend(loc='upper right')
     plt.xlabel('epoch')
     plt.ylabel('loss')
-    plt.savefig(f'{experiment_name}_train_test_loss.png')
+    plt.savefig(f'{experiment_name}_train_loss.png')
 
 def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
     with open(f'{experiment_name}.log', 'a') as f:
