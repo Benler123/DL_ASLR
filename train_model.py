@@ -185,12 +185,6 @@ if __name__ == '__main__':
         summarize_model(trained_model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
     if MODEL_NAME == "CNN": 
         summarize_model(trained_model, (NUM_FRAMES, NUM_LANDMARKS * 2))
-    # optimizer = optim.Adam(NN_model.parameters(), lr=LEARNING_RATE)
-    # model, loss, accuracy = train_model(NN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
-    # summarize_model(model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
+    if MODEL_NAME == "LSTM": 
+        summarize_model(trained_model, (NUM_LANDMARKS*2))
 
-    # optimizer = optim.Adam(LSTM_model.parameters(), lr=LEARNING_RATE)
-    # model, loss, accuracy = train_model(LSTM_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
-    # summarize_model(LSTM_model, (BATCH_SIZE, NUM_FRAMES, NUM_LANDMARKS, 2), f'{EXPERIMENT_NAME}')
-    # test_model(model, X_test, y_test, criterion)
-    # generate_save_plots(EXPERIMENT_NAME, loss, accuracy)
