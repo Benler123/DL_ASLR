@@ -19,7 +19,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 EPOCHS=2
 BATCH_SIZE=32
 MODEL_NAME = "LSTM"
-EXPERIMENT_NAME='lstm_dropout'
+EXPERIMENT_NAME='lstm_reg'
 LEARNING_RATE=0.0001
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
@@ -70,7 +70,7 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
             else: 
                 output = model(X_batch).squeeze()
                 loss = criterion(output, y_batch)
-                
+
             y_pred_train = torch.argmax(output, dim=1)
             y_actual_labels = torch.argmax(y_batch, dim=1)
             train_acc = (y_pred_train == y_actual_labels).float().mean()
@@ -89,11 +89,16 @@ def test_model(model, X_test, y_test, criterion):
     y_test = torch.tensor(y_test, dtype=torch.float32).to(device)
     if MODEL_NAME == "NN": 
         X_test = X_test.view(X_test.shape[0], -1, X_test.shape[1] * X_test.shape[2])
-    output = model(X_test).squeeze()
+    if MODEL_NAME == "LSTM": 
+        output, l2_reg = model(X_test)
+        loss = criterion(output.squeeze(), y_test) + l2_reg
+    else: 
+        output = model(X_test).squeeze()
+        loss = criterion(output, y_test)
+        
     y_pred_test = torch.argmax(output, dim=1)
     y_actual_labels = torch.argmax(y_test, dim=1)
     test_acc = (y_pred_test == y_actual_labels).float().mean()
-    loss = criterion(output, y_test)
     print(f'Test Loss {loss.item()} Accuracy {test_acc}')
     return test_acc, loss
     
