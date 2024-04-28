@@ -100,7 +100,7 @@ def test_model(model, X_test, y_test, criterion):
     y_actual_labels = torch.argmax(y_test, dim=1)
     test_acc = (y_pred_test == y_actual_labels).float().mean()
     print(f'Test Loss {loss.item()} Accuracy {test_acc}')
-    logger.info(f'Test Loss {train_loss.item()} Accuracy {test_acc}')
+    logger.info(f'Test Loss {loss.item()} Accuracy {test_acc}')
     return test_acc, loss
     
 def generate_save_plots(experiment_name, train_loss, test_loss, train_accuracy, test_accuracy):
