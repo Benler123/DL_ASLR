@@ -11,6 +11,12 @@ Deep Learning CS 7643 Group Project
 2. **Create and activate environment:**
     - (Skip if you have created the environment before). Run `conda env create -f environment.yml`. This will create an environment called `DL_ASLR_ENV`. 
     - Activate this environment by running `conda activate DL_ASLR_ENV`
+
+3. **Preprocess Data**
+    - Download the preprocessed data using [this link](https://www.dropbox.com/scl/fo/1tkb34i2xyjyl0xkdfmbj/ABjD3H-uKgYVivLEv8dMvjw?rlkey=t13vd2v643wjv8fy0vu0p6xo8&dl=0). 
+    - Alternatively, you can download the original data  by running `python3 download_data.py` **locally** (~50 GB). Then, you can run `python3 preprocess_data.py` to generate the preprocessed data (~2GB). 
+    - The preprocessed data should be named `X_train_combined` and `y_train_combined`. Put both these files in the `preprocessing` folder. 
+
 3. **Modify Model and Experiment Names in `train_model.py`:**
    - Open `train_model.py` in a text editor of your choice.
    - Change MODEL_NAME to one of the following:
@@ -58,8 +64,9 @@ Deep Learning CS 7643 Group Project
 
 ### One Time Data Download
 
-- Download the preprocessed data using [this link](https://www.dropbox.com/scl/fo/1tkb34i2xyjyl0xkdfmbj/ABjD3H-uKgYVivLEv8dMvjw?rlkey=t13vd2v643wjv8fy0vu0p6xo8&dl=0). Put this in your scratch directory. 
-- Alternatively, you can download the original data  by running `python3 download_data.py` **locally** (~50 GB). Then, you can run `python3 preprocess_data.py` to generate the preprocessed data (~2GB) and transfer to your scratch directory.
+- Download the preprocessed data using [this link](https://www.dropbox.com/scl/fo/1tkb34i2xyjyl0xkdfmbj/ABjD3H-uKgYVivLEv8dMvjw?rlkey=t13vd2v643wjv8fy0vu0p6xo8&dl=0). 
+- Alternatively, you can download the original data  by running `python3 download_data.py` **locally** (~50 GB). Then, you can run `python3 preprocess_data.py` to generate the preprocessed data (~2GB). 
+- The preprocessed data should be named `X_train_combined` and `y_train_combined`. Your working directory should look like this: DL_ASLR, OnDemand, Scratch. Put the preprocessed data in the scratch directory. 
 
 ### Load Anaconda, allocate resources 
 

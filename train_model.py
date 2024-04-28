@@ -48,8 +48,12 @@ def load_data():
         X_train = np.load('../scratch/X_train_combined.npy')
         y_train = np.load('../scratch/y_train_combined.npy')
     except:
-        print('Data not found. Please run the preprocessing script first.')
-        raise Exception('Data not found')
+        try:
+            X_train = np.load('preprocessing/X_train_combined.npy')
+            y_train = np.load('preprocessing/y_train_combined.npy')
+        except: 
+            print('Data not found. Please run the preprocessing script first.')
+            raise Exception('Data not found')
     if MODEL_NAME == "CNN" or MODEL_NAME == "LSTM": 
         X_train = X_train.reshape(-1, NUM_FRAMES, NUM_LANDMARKS, 2)
     return X_train, y_train
