@@ -15,11 +15,12 @@ from torchsummary import summary
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-EPOCHS=10
+
+EPOCHS=20
 BATCH_SIZE=32
-MODEL_NAME = "NN"
-EXPERIMENT_NAME='NN_augmented_data_baseline'
-LEARNING_RATE=0.0001
+MODEL_NAME = "LSTM"
+EXPERIMENT_NAME='lstm_LR=0.0005'
+LEARNING_RATE=0.0005
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
 HIDDEN_SIZE = 256
