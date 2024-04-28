@@ -4,7 +4,8 @@ import torch.nn as nn
 import torch.optim as optim
 import models.base_nn as base_nn
 import models.lstm as lstm
-import models.cnn_1d as cnn_1d
+import models.cnn_1d_v1 as cnn_1d_v1
+import models.cnn_1d_v2 as cnn_1d_v2
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import contextlib
@@ -14,7 +15,7 @@ from torchsummary import summary
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-EPOCHS=20
+EPOCHS=10
 BATCH_SIZE=32
 EXPERIMENT_NAME='cnn_1d'
 LEARNING_RATE=0.0001
@@ -116,12 +117,12 @@ if __name__ == '__main__':
     # LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, output_classes=len(y_train[0]))
     # LSTM_model.to(device)
 
-    CNN_model = cnn_1d.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0]))
+    CNN_model = cnn_1d_v2.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0]))
     CNN_model.to(device)
 
     
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(CNN_model.parameters(), lr=LEARNING_RATE)
+    optimizer = optim.Adam(CNN_model.parameters(), lr=LEARNING_RATE, weight_decay=1e-4)
     trained_model, loss, accuracy = train_model(CNN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
     test_model(trained_model, X_test, y_test, criterion)
     generate_save_plots(EXPERIMENT_NAME, loss, accuracy)
