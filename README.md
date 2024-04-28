@@ -45,10 +45,10 @@ Deep Learning CS 7643 Group Project
 
 ## How to use PACE 
 - Running the models locally can be time consuming due to limited RAM. If you have access to PACE, you can run this project in PACE to get faster results. 
-- Open a terminal or command prompt.  
-- Log into PACE by running `ssh gburdell3@login-ice.pace.gatech.edu` (substitute your email). This will prompt you to log in using your GT password.
-- Use this command `salloc -N1 --mem-per-gpu=12G -t01:00:00 --gres=gpu:V100:1 --ntasks-per-node=4` to allocate yourself access to a GPU. In this case, it will allot a single node, a single V100 with 12gb of memory, 4 cores/threads for 1 hour. You can change the duration, nodes and type of GPU depending on your need, but this is a standard choice. 
-- Now that you have the resources, follow the guides below to set up your conda folder(if you haven't set up already), and activate your conda environment. Then you can run the project using the `How to run the project` guide. 
+1. Open a terminal or command prompt.  
+2. Log into PACE by running `ssh gburdell3@login-ice.pace.gatech.edu` (substitute your email). This will prompt you to log in using your GT password.
+3. Use this command `salloc -N1 --mem-per-gpu=12G -t01:00:00 --gres=gpu:V100:1 --ntasks-per-node=4` to allocate yourself access to a GPU. In this case, it will allot a single node, a single V100 with 12gb of memory, 4 cores/threads for 1 hour. You can change the duration, nodes and type of GPU depending on your need, but this is a standard choice. 
+4. Now that you have the resources, follow the guides below to set up your conda folder (if you haven't set up already), and activate your conda environment. Then you can run the project using the `How to run the project` guide. 
 
 ## One Time Conda Set Up in PACE
 
