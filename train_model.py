@@ -16,16 +16,16 @@ from torchsummary import summary
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-EPOCHS=2
+EPOCHS=20
 BATCH_SIZE=32
 MODEL_NAME = "LSTM"
 EXPERIMENT_NAME='lstm_reg'
-LEARNING_RATE=0.0001
+LEARNING_RATE=0.001
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
 HIDDEN_SIZE = 256
 NUM_LAYERS = 2
-WEIGHT_DECAY = 0.0001
+WEIGHT_DECAY = 0.01
 
 
 logger = logging.getLogger(__name__)
