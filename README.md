@@ -10,6 +10,7 @@ Deep Learning CS 7643 Group Project
      ```
 2. **Create and activate environment:**
     - (Skip if you have created the environment before). Run `conda env create -f environment.yml`. This will create an environment called `DL_ASLR_ENV`. 
+    - Deactivate any current environments by running `conda deactivate`
     - Activate this environment by running `conda activate DL_ASLR_ENV`
 
 3. **Preprocess Data**
