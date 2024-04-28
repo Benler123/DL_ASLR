@@ -27,6 +27,7 @@ Deep Learning CS 7643 Group Project
    - Change EXPERIMENT_NAME to your desired experiment name
 
 4. **Run the Training Script:**
+    - Navigate to the root of the project `DL_ASLR`
    - In the terminal, execute the following command to start training:
      ```bash
      python3 train_model.py
