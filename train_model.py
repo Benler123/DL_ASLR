@@ -9,37 +9,50 @@ import models.cnn_1d_v2 as cnn_1d_v2
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import contextlib
+import logging
 from torchsummary import summary
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-EPOCHS=10
+EPOCHS=1
 BATCH_SIZE=32
-EXPERIMENT_NAME='cnn_1d'
-LEARNING_RATE=0.0001
+MODEL_NAME = "LSTM"
+EXPERIMENT_NAME='lstm_LR=0.0005'
+LEARNING_RATE=0.0005
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
 HIDDEN_SIZE = 256
 NUM_LAYERS = 2
 
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
+
+handler = logging.FileHandler(f'{EXPERIMENT_NAME}.log')
+handler.setLevel(logging.INFO)
+
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+
+logger.addHandler(handler)
+
 def load_data():
     try:
-        X_train_flat = np.load('../scratch/X_train_combined.npy')
-        y_train = np.load('../scratch/y_train_combined.npy')
+        X_train = np.load('scratch/X_train_combined.npy')
+        y_train = np.load('scratch/y_train_combined.npy')
     except:
         print('Data not found. Please run the preprocessing script first.')
         raise Exception('Data not found')
-
-    X_train = X_train_flat.reshape(-1, NUM_FRAMES, NUM_LANDMARKS, 2)
+    if MODEL_NAME == "CNN" or MODEL_NAME == "LSTM": 
+        X_train = X_train.reshape(-1, NUM_FRAMES, NUM_LANDMARKS, 2)
     return X_train, y_train
 
 def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_size):
     loss_list = []
     train_acc_list = []
     for epoch in range(epochs):
-        print(f'EPOCH: {epoch}')
         epoch_loss = []
         epoch_train_acc = []
         for i in range(0, len(X_train), batch_size):
@@ -47,7 +60,8 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
             y_batch = y_train[i:i+batch_size, :]
             X_batch = torch.tensor(X_batch, dtype=torch.float32).to(device)
             y_batch = torch.tensor(y_batch, dtype=torch.float32).to(device)
-            # X_batch = X_batch.view(X_batch.shape[0], -1, X_batch.shape[1] * X_batch.shape[2])
+            if MODEL_NAME == "NN": 
+                X_batch = X_batch.view(X_batch.shape[0], -1, X_batch.shape[1] * X_batch.shape[2])
             optimizer.zero_grad()
 
             output = model(X_batch).squeeze()
@@ -62,21 +76,23 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
             epoch_train_acc.append(train_acc)
         loss_list.append(sum(epoch_loss) / len(epoch_loss))
         train_acc_list.append(sum(epoch_train_acc) / len(epoch_train_acc))
-        print(f'Epoch {epoch + 1} Loss {loss_list[-1]} Accuracy {train_acc_list[-1]}')
+        logger.info(f'Epoch {epoch + 1} Loss {loss_list[-1]} Accuracy {train_acc_list[-1]}')
     return model, loss_list, train_acc_list
 
 def test_model(model, X_test, y_test, criterion):
     X_test = torch.tensor(X_test, dtype=torch.float32).to(device)
     y_test = torch.tensor(y_test, dtype=torch.float32).to(device)
-    # X_test = X_test.view(X_test.shape[0], -1, X_test.shape[1] * X_test.shape[2])
+    if MODEL_NAME == "NN": 
+        X_test = X_test.view(X_test.shape[0], -1, X_test.shape[1] * X_test.shape[2])
     output = model(X_test).squeeze()
     y_pred_test = torch.argmax(output, dim=1)
     y_actual_labels = torch.argmax(y_test, dim=1)
     test_acc = (y_pred_test == y_actual_labels).float().mean()
     loss = criterion(output, y_test)
-    print(f'Test Loss {loss.item()} Accuracy {test_acc}')
+    logger.info(f'Test Loss {loss.item()} Accuracy {test_acc}')
 
 def generate_save_plots(experiment_name, loss, accuracy):
+    accuracy = [acc.cpu().numpy() for acc in accuracy]
     plt.figure()
     plt.plot(accuracy)
     plt.title('Training Accuracy')
@@ -94,39 +110,41 @@ def generate_save_plots(experiment_name, loss, accuracy):
     plt.savefig(f'{experiment_name}_train_loss.png')
 
 def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
-    with open(f'{experiment_name}_summary.txt', 'w') as f:
-        with contextlib.redirect_stdout(f):
-            print(summary(model, input_shape))
+    logger.info(summary(model, input_shape))
 
 if __name__ == '__main__':
-    X_data, y_data = load_data()
-    X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size=0.2)
-
-    print(f'X_data shape: {X_data.shape}')
-    print(f'y_data shape: {y_data.shape}')
-
-    print(f'X_train shape: {X_train.shape}')
-    print(f'y_train shape: {y_train.shape}')
-    print(f'X_test shape: {X_test.shape}')
-    print(f'y_test shape: {y_test.shape}')
-
-
-    # NN_model = base_nn.NN_model(len(X_train[0]) * 2, len(y_train[1]))
-    # NN_model.to(device)
-
-    # LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, output_classes=len(y_train[0]))
-    # LSTM_model.to(device)
-
-    CNN_model = cnn_1d_v2.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0]))
-    CNN_model.to(device)
-
+    X_train, y_train = load_data()
+    X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
     
+    
+    logger.info(f'X_train shape: {X_train.shape}')
+    logger.info(f'y_train shape: {y_train.shape}')
+    logger.info(f'X_test shape: {X_test.shape}')
+    logger.info(f'y_test shape: {y_test.shape}')
+
+    NN_model = base_nn.NN_model(X_train.shape[1] * X_train.shape[2], len(y_train[1])).to(device)
+
+    LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, output_classes=len(y_train[0])).to(device)
+
+    CNN_model = cnn_1d_v2.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0])).to(device)
+
+    current_model = None
+    if MODEL_NAME == "CNN": 
+        current_model = CNN_model
+    if MODEL_NAME == "NN": 
+        current_model = NN_model
+    if MODEL_NAME == "LSTM": 
+        current_model = LSTM_model
+        
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(CNN_model.parameters(), lr=LEARNING_RATE, weight_decay=1e-4)
-    trained_model, loss, accuracy = train_model(CNN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
+    optimizer = optim.Adam(current_model.parameters(), lr=LEARNING_RATE)
+    trained_model, loss, accuracy = train_model(current_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
     test_model(trained_model, X_test, y_test, criterion)
     generate_save_plots(EXPERIMENT_NAME, loss, accuracy)
-    
+    if MODEL_NAME == "NN": 
+        summarize_model(trained_model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
+    if MODEL_NAME == "CNN": 
+        summarize_model(trained_model, (NUM_FRAMES, NUM_LANDMARKS * 2))
     # optimizer = optim.Adam(NN_model.parameters(), lr=LEARNING_RATE)
     # model, loss, accuracy = train_model(NN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
     # summarize_model(model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
