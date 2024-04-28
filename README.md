@@ -47,16 +47,15 @@ Deep Learning CS 7643 Group Project
 
 - By default, conda creates new environments in the home directory at ~/.conda. However, conda environments can be quite large, and the allotted home directory has a relatively small storage quota.
   
-1. Log into PACE by running `ssh gburdell3@login-ice.pace.gatech.edu` (substitute your email). This will prompt you to log in using your GT password.
-2. First, check to see if you have an existing `~/.conda` directory or symlink by running:
+1. First, check to see if you have an existing `~/.conda` directory or symlink by running:
     - `file ~/.conda`
-3. If `file ~/.conda` reports "No such file or directory":
+2. If `file ~/.conda` reports "No such file or directory":
     1. Create a `.conda` directory in your scratch folder by running:
         - `mkdir ~/scratch/.conda`
     2. Then, create a symlink from your scratch folder to your home directory:
         - `ln -s ~/scratch/.conda ~/.conda`
 
-4. If `file ~/.conda` reports that `~/.conda` is a directory, then:
+3. If `file ~/.conda` reports that `~/.conda` is a directory, then:
     1. Move your `.conda` directory to your scratch space:
         - `mv ~/.conda ~/scratch/`
     2. Create a symlink from your project space to your home directory:
