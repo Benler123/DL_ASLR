@@ -39,9 +39,15 @@ You're now ready to run the project!
 
 ## How to Run the Project
 
-1. **Navigate to the Project Root:**
+1. **Clone the Project Repository:**
    - Open a terminal or command prompt.
-   - Change directory to the root of your project where `train_model.py` is located.
+   - Navigate to the directory where you want to store the project.
+   - Clone the repository using Git by running the following command:
+     ```bash
+     git clone <https://github.com/Benler123/DL_ASLR.git>
+     ```
+   - Replace `<repository_url>` with the URL of your Git repository.
+
 
 2. **Modify Model and Experiment Names in `train_model.py`:**
    - Open `train_model.py` in a text editor of your choice.
