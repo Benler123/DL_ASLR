@@ -113,7 +113,7 @@ if __name__ == '__main__':
     print(f'X_test shape: {X_test.shape}')
     print(f'y_test shape: {y_test.shape}')
 
-    NN_model = base_nn.NN_model(len(X_train[0]) * 2, len(y_train[1])).to(device)
+    NN_model = base_nn.NN_model(X_train.shape[1] * X_train.shape[2], len(y_train[1])).to(device)
 
     LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, output_classes=len(y_train[0])).to(device)
 
@@ -135,7 +135,7 @@ if __name__ == '__main__':
     if MODEL_NAME == "NN": 
         summarize_model(trained_model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
     if MODEL_NAME == "CNN": 
-        summarize_model(trained_model, (BATCH_SIZE, NUM_LANDMARKS*2))
+        summarize_model(trained_model, (BATCH_SIZE, NUM_LANDMARKS * 2, NUM_FRAMES))
     # optimizer = optim.Adam(NN_model.parameters(), lr=LEARNING_RATE)
     # model, loss, accuracy = train_model(NN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
     # summarize_model(model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
