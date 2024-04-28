@@ -19,7 +19,7 @@ import gc
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-EPOCHS=10
+EPOCHS=1
 BATCH_SIZE=32
 MODEL_NAME = "LSTM"
 EXPERIMENT_NAME='lstm_double'
@@ -88,24 +88,41 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
         logger.info(f'Epoch {epoch + 1} Loss {loss_list[-1]} Accuracy {train_acc_list[-1]}')
     return model, loss_list, train_acc_list
 
-def test_model(model, X_test, y_test, criterion):
-    X_test = torch.tensor(X_test, dtype=torch.float32).to(device)
-    y_test = torch.tensor(y_test, dtype=torch.float32).to(device)
-    if MODEL_NAME == "NN": 
-        X_test = X_test.view(X_test.shape[0], -1, X_test.shape[1] * X_test.shape[2])
-    if MODEL_NAME == "LSTM": 
-        output, l2_reg = model(X_test)
-        loss = criterion(output.squeeze(), y_test) + l2_reg
-    else: 
-        output = model(X_test).squeeze()
-        loss = criterion(output, y_test)
-        
-    y_pred_test = torch.argmax(output, dim=1)
-    y_actual_labels = torch.argmax(y_test, dim=1)
-    test_acc = (y_pred_test == y_actual_labels).float().mean()
-    print(f'Test Loss {loss.item()} Accuracy {test_acc}')
-    logger.info(f'Test Loss {loss.item()} Accuracy {test_acc}')
-    return test_acc, loss
+def test_model(model, X_test, y_test, criterion, batch_size):
+    test_loss = []
+    test_acc = []
+    
+    with torch.no_grad():
+        for i in range(0, len(X_test), batch_size):
+            X_batch = X_test[i:i+batch_size]
+            y_batch = y_test[i:i+batch_size]
+            X_batch = torch.tensor(X_batch, dtype=torch.float32).to(device)
+            y_batch = torch.tensor(y_batch, dtype=torch.float32).to(device)
+            
+            if MODEL_NAME == "NN":
+                X_batch = X_batch.view(X_batch.shape[0], -1, X_batch.shape[1] * X_batch.shape[2])
+            
+            if MODEL_NAME == "LSTM":
+                output, l2_reg = model(X_batch)
+                loss = criterion(output.squeeze(), y_batch) + l2_reg
+            else:
+                output = model(X_batch).squeeze()
+                loss = criterion(output, y_batch)
+            
+            y_pred_test = torch.argmax(output, dim=1)
+            y_actual_labels = torch.argmax(y_batch, dim=1)
+            batch_acc = (y_pred_test == y_actual_labels).float().mean()
+            
+            test_loss.append(loss.item())
+            test_acc.append(batch_acc.item())
+    
+    avg_test_loss = sum(test_loss) / len(test_loss)
+    avg_test_acc = sum(test_acc) / len(test_acc)
+    
+    print(f'Test Loss {avg_test_loss} Accuracy {avg_test_acc}')
+    logger.info(f'Test Loss {avg_test_loss} Accuracy {avg_test_acc}')
+    
+    return avg_test_acc, avg_test_loss
     
 def generate_save_plots(experiment_name, train_loss, test_loss, train_accuracy, test_accuracy):
     train_accuracy = [acc.cpu().numpy() for acc in train_accuracy]
