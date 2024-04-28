@@ -17,8 +17,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 EPOCHS=1
 BATCH_SIZE=32
-MODEL_NAME = "CNN"
-EXPERIMENT_NAME='cnn_baseline'
+MODEL_NAME = "LSTM"
+EXPERIMENT_NAME='lstm_baseline'
 LEARNING_RATE=0.0001
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
@@ -134,8 +134,8 @@ if __name__ == '__main__':
     generate_save_plots(EXPERIMENT_NAME, loss, accuracy)
     if MODEL_NAME == "NN": 
         summarize_model(trained_model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
-    if MODEL_NAME == "CNN": 
-        summarize_model(trained_model, ( NUM_FRAMES, NUM_LANDMARKS * 2))
+    if MODEL_NAME == "CNN" or MODEL_NAME == "LSTM": 
+        summarize_model(trained_model, (NUM_FRAMES, NUM_LANDMARKS * 2))
     # optimizer = optim.Adam(NN_model.parameters(), lr=LEARNING_RATE)
     # model, loss, accuracy = train_model(NN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
     # summarize_model(model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
