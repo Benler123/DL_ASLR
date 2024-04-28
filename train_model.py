@@ -17,8 +17,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 EPOCHS=1
 BATCH_SIZE=32
-MODEL_NAME = "NN"
-EXPERIMENT_NAME='base_nn'
+MODEL_NAME = "CNN"
+EXPERIMENT_NAME='cnn_baseline'
 LEARNING_RATE=0.0001
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
