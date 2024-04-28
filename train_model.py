@@ -9,32 +9,46 @@ import models.cnn_1d_v2 as cnn_1d_v2
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import contextlib
+import logging
 from torchsummary import summary
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-
-EPOCHS=25
+EPOCHS=10
 BATCH_SIZE=32
-MODEL_NAME = "LSTM"
-EXPERIMENT_NAME='lstm_baseline'
+MODEL_NAME = "NN"
+EXPERIMENT_NAME='NN_augmented_data_baseline'
 LEARNING_RATE=0.0001
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
 HIDDEN_SIZE = 256
 NUM_LAYERS = 2
 
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
+
+handler = logging.FileHandler(f'{EXPERIMENT_NAME}.log')
+handler.setLevel(logging.INFO)
+
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+
+logger.addHandler(handler)
+
 def load_data():
     try:
-        X_train = np.load('../scratch/X_train_combined.npy')
-        y_train = np.load('../scratch/y_train_combined.npy')
+        X_train = np.load('scratch/X_train_combined.npy')
+        y_train = np.load('scratch/y_train_combined.npy')
+        y_test = np.load('scratch/y_test.npy')
+        X_test = np.load('scratch/X_test.npy')
     except:
         print('Data not found. Please run the preprocessing script first.')
         raise Exception('Data not found')
     if MODEL_NAME == "CNN" or MODEL_NAME == "LSTM": 
         X_train = X_train.reshape(-1, NUM_FRAMES, NUM_LANDMARKS, 2)
-    return X_train, y_train
+    return X_train, y_train, X_test, y_test
 
 def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_size):
     loss_list = []
@@ -63,7 +77,7 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
             epoch_train_acc.append(train_acc)
         loss_list.append(sum(epoch_loss) / len(epoch_loss))
         train_acc_list.append(sum(epoch_train_acc) / len(epoch_train_acc))
-        print(f'Epoch {epoch + 1} Loss {loss_list[-1]} Accuracy {train_acc_list[-1]}')
+        logger.info(f'Epoch {epoch + 1} Loss {loss_list[-1]} Accuracy {train_acc_list[-1]}')
     return model, loss_list, train_acc_list
 
 def test_model(model, X_test, y_test, criterion):
@@ -76,7 +90,7 @@ def test_model(model, X_test, y_test, criterion):
     y_actual_labels = torch.argmax(y_test, dim=1)
     test_acc = (y_pred_test == y_actual_labels).float().mean()
     loss = criterion(output, y_test)
-    print(f'Test Loss {loss.item()} Accuracy {test_acc}')
+    logger.info(f'Test Loss {loss.item()} Accuracy {test_acc}')
 
 def generate_save_plots(experiment_name, loss, accuracy):
     accuracy = [acc.cpu().numpy() for acc in accuracy]
@@ -99,14 +113,10 @@ def generate_save_plots(experiment_name, loss, accuracy):
 def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
     with open(f'{experiment_name}_summary.txt', 'w') as f:
         with contextlib.redirect_stdout(f):
-            print(summary(model, input_shape))
+            logger.info(summary(model, input_shape))
 
 if __name__ == '__main__':
-    X_data, y_data = load_data()
-    X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size=0.2)
-
-    print(f'X_data shape: {X_data.shape}')
-    print(f'y_data shape: {y_data.shape}')
+    X_train, y_train, X_test, y_test = load_data()
 
     print(f'X_train shape: {X_train.shape}')
     print(f'y_train shape: {y_train.shape}')
