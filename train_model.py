@@ -18,18 +18,18 @@ import gc
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+NUM_FRAMES = 60
+NUM_LANDMARKS = 21
 
 EPOCHS=10
 BATCH_SIZE=32
 MODEL_NAME = "LSTM"
 EXPERIMENT_NAME='lstm_double'
 LEARNING_RATE=0.001
-NUM_FRAMES = 60
-NUM_LANDMARKS = 21
-HIDDEN_SIZE = 256
-NUM_LAYERS = 2
-WEIGHT_DECAY = 0.001
-DROPOUT_PROB = 0.7
+LSTM_HIDDEN_SIZE = 256
+LSTM_NUM_LAYERS = 2
+LSTM_WEIGHT_DECAY = 0.001
+LSTM_DROPOUT_PROB = 0.7
 
 
 logger = logging.getLogger(__name__)
@@ -156,11 +156,20 @@ def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
 if __name__ == '__main__':
     gc.collect()
     torch.cuda.empty_cache()
+    logger.info(f'Model Name: {MODEL_NAME}')
+    logger.info(f'Experiment Name: {EXPERIMENT_NAME}')
+    logger.info(f'Epochs: {EPOCHS}')
+    logger.info(f'Batch Size: {BATCH_SIZE}')
+    logger.info(f'Learning Rate: {LEARNING_RATE}')
 
+    if MODEL_NAME == "LSTM":
+        logger.info(f'LSTM Hidden Size: {LSTM_HIDDEN_SIZE}')
+        logger.info(f'LSTM Number of Layers: {LSTM_NUM_LAYERS}')
+        logger.info(f'LSTM Weight Decay: {LSTM_WEIGHT_DECAY}')
+        logger.info(f'LSTM Dropout Probability: {LSTM_DROPOUT_PROB}')
     X_train, y_train = load_data()
     X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
 
-    
     logger.info(f'X_train shape: {X_train.shape}')
     logger.info(f'y_train shape: {y_train.shape}')
     logger.info(f'X_test shape: {X_test.shape}')
@@ -168,7 +177,7 @@ if __name__ == '__main__':
 
     NN_model = base_nn.NN_model(X_train.shape[1] * X_train.shape[2], len(y_train[1])).to(device)
 
-    LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, weight_decay=WEIGHT_DECAY, dropout_prob=DROPOUT_PROB, output_classes=len(y_train[0])).to(device)
+    LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=LSTM_HIDDEN_SIZE, num_layers=LSTM_NUM_LAYERS, weight_decay=LSTM_WEIGHT_DECAY, dropout_prob=LSTM_DROPOUT_PROB, output_classes=len(y_train[0])).to(device)
 
     CNN_model = cnn_1d_v2.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0])).to(device)
 
