@@ -1,10 +1,6 @@
 # DL_ASLR
 Deep Learning CS 7643 Group Project
 
-## Staged Processed Data
-
-
-
 ## Running the project locally
 
 1. **Clone the Project Repository:**
@@ -13,7 +9,7 @@ Deep Learning CS 7643 Group Project
      git clone https://github.com/Benler123/DL_ASLR.git
      ```
 2. **Create and activate environment:**
-    - Run `conda env create -f environment.yml`. This will create an environment called `DL_ASLR_ENV`
+    - (Skip if you have created the environment before). Run `conda env create -f environment.yml`. This will create an environment called `DL_ASLR_ENV`. 
     - Activate this environment by running `conda activate DL_ASLR_ENV`
 3. **Modify Model and Experiment Names in `train_model.py`:**
    - Open `train_model.py` in a text editor of your choice.
@@ -41,8 +37,7 @@ Deep Learning CS 7643 Group Project
 1. Open a terminal or command prompt.  
 2. Log into PACE by running `ssh gburdell3@login-ice.pace.gatech.edu` (substitute your email). This will prompt you to log in using your GT password.
 
-
-### One Time Conda Set Up in PACE
+### One Time Conda Set Up in PACE 
 
 - By default, conda creates new environments in the home directory at ~/.conda. However, conda environments can be quite large, and the allotted home directory has a relatively small storage quota.
   
@@ -61,25 +56,17 @@ Deep Learning CS 7643 Group Project
     2. Create a symlink from your project space to your home directory:
         - `ln -s ~/scratch/.conda ~/.conda`
 
-### How to Use Environment in PACE
+### One Time Data Download
 
-1. Follow the one-time setup to create a conda symlink.
-2. Log into PACE by running `ssh gburdell3@login-ice.pace.gatech.edu` (substitute your email). This will prompt you to log in using your GT password.
-3. Load Anaconda by running:
+- Download the preprocessed data using [this link](https://www.dropbox.com/scl/fo/1tkb34i2xyjyl0xkdfmbj/ABjD3H-uKgYVivLEv8dMvjw?rlkey=t13vd2v643wjv8fy0vu0p6xo8&dl=0). Put this in your scratch directory. 
+- You can alternatively download the data locally by running `python3 preprocessing.py` and transfer to your scratch directory in PACE.
+
+### Load Anaconda, allocate resources 
+
+1. Load Anaconda by running:
     - `module load anaconda3/2022.05.0.1`
-4. Go to the root of the project and run `conda env create -f environment.yml` (skip if you have created the environment before). This will create an environment called `DL_ASLR_ENV`. 
-5. Deactivate any current environments (if you are in base or any other) by running:
-    - `conda deactivate`
-6. Activate the environment by running:
-    - `conda activate DL_ASLR_ENV`
 
-### Download preprocessed data 
+2. Use this command `salloc -N1 --mem-per-gpu=12G -t01:00:00 --gres=gpu:V100:1 --ntasks-per-node=4` to allocate yourself access to a GPU. In this case, it will allot a single node, a single V100 with 12gb of memory, 4 cores/threads for 1 hour. You can change the duration, nodes and type of GPU depending on your need, but this is a standard choice. 
 
-- Download the data using [this link](https://www.dropbox.com/scl/fo/1tkb34i2xyjyl0xkdfmbj/ABjD3H-uKgYVivLEv8dMvjw?rlkey=t13vd2v643wjv8fy0vu0p6xo8&dl=0). Put this in your scratch directory. 
-
-### Allocate resources 
-
-1. Use this command `salloc -N1 --mem-per-gpu=12G -t01:00:00 --gres=gpu:V100:1 --ntasks-per-node=4` to allocate yourself access to a GPU. In this case, it will allot a single node, a single V100 with 12gb of memory, 4 cores/threads for 1 hour. You can change the duration, nodes and type of GPU depending on your need, but this is a standard choice. 
-
-2. You're now ready to run the project! Follow the steps in `Running the project locally` to clone the project and run the models. 
+3. You're now ready to run the project! Follow the steps in `Running the project locally` to clone the project and run the models. 
 
