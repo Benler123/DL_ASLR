@@ -14,7 +14,7 @@ from torchsummary import summary
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-EPOCHS=20
+EPOCHS=1
 BATCH_SIZE=32
 EXPERIMENT_NAME='cnn_1d'
 LEARNING_RATE=0.0001
@@ -38,7 +38,6 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
     loss_list = []
     train_acc_list = []
     for epoch in range(epochs):
-        print(f'EPOCH: {epoch}')
         epoch_loss = []
         epoch_train_acc = []
         for i in range(0, len(X_train), batch_size):
@@ -76,6 +75,7 @@ def test_model(model, X_test, y_test, criterion):
     print(f'Test Loss {loss.item()} Accuracy {test_acc}')
 
 def generate_save_plots(experiment_name, loss, accuracy):
+    accuracy = accuracy.cpu()
     plt.figure()
     plt.plot(accuracy)
     plt.title('Training Accuracy')
@@ -110,19 +110,22 @@ if __name__ == '__main__':
     print(f'y_test shape: {y_test.shape}')
 
 
-    # NN_model = base_nn.NN_model(len(X_train[0]) * 2, len(y_train[1]))
-    # NN_model.to(device)
+    NN_model = base_nn.NN_model(len(X_train[0]) * 2, len(y_train[1])).to(device)
 
-    # LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, output_classes=len(y_train[0]))
-    # LSTM_model.to(device)
+    LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, output_classes=len(y_train[0])).to(device)
 
-    CNN_model = cnn_1d.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0]))
-    CNN_model.to(device)
-
-    
+    CNN_model = cnn_1d.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0])).to(device)
+    current_model = None
+    if EXPERIMENT_NAME == "cnn_1d": 
+        current_model = CNN_model
+    if EXPERIMENT_NAME == "base_nn": 
+        current_model = NN_model
+    if EXPERIMENT_NAME == "lstm": 
+        current_model = LSTM_model
+        
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(CNN_model.parameters(), lr=LEARNING_RATE)
-    trained_model, loss, accuracy = train_model(CNN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
+    optimizer = optim.Adam(current_model.parameters(), lr=LEARNING_RATE)
+    trained_model, loss, accuracy = train_model(current_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
     test_model(trained_model, X_test, y_test, criterion)
     generate_save_plots(EXPERIMENT_NAME, loss, accuracy)
     
