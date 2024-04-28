@@ -12,7 +12,6 @@ class LSTM_model(nn.Module):
         
     def forward(self, x):
         # input = (batch_size, sequence_length, num_landmarks*2)
-        print("X size: ", x.size())
         batch_size, sequence_length, num_landmarks, _ = x.size()
         x = x.view(batch_size, sequence_length, -1)
         
