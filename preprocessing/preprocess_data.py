@@ -11,8 +11,8 @@ from torch.utils.data import DataLoader, TensorDataset
 from sklearn.preprocessing import OneHotEncoder
 
 NUM_FRAMES=60
-SEQUENCE_NUM = 3
-
+START = 80000
+END = 100000
 '''
 Methods to either upsample or downsample frames to return NUM_FRAMES freams
 '''
@@ -218,20 +218,44 @@ def normalize_coords(coords):
     std_dev = np.std(coords, axis=0)
     return (coords - mean) / std_dev
 
+def add_rotation(data, labels,prob=0.2):
+    '''
+    Add rotation to the data. This is useful for data augmentation
+
+    Parameters:
+    data: list of dataframes
+
+    Returns:
+    new_data: list of dataframes with rotation added
+    '''
+    print("Adding rotation")
+    new_data = []
+    same_labels = []
+    for index, df  in enumerate(data):
+        if np.random.rand() < prob:
+            angle = np.random.rand() * 360
+            rotation_matrix = np.array([[np.cos(angle), -np.sin(angle)], [np.sin(angle), np.cos(angle)]])
+            new_df = np.dot(df, rotation_matrix)
+            new_data.append(new_df)
+            same_labels.append(labels[index])
+    return new_data, same_labels
 
 def preprocess_data():
     print('Preprocessing data...')
     data_files = glob("kaggle/input/asl-signs/train_landmark_files/*/*.parquet", recursive=True)
-    X_train, y_train = sequential_sample_parquets(data_files, 10000 * SEQUENCE_NUM, 10000 *  (SEQUENCE_NUM + 1))
+    X_train, y_train = sequential_sample_parquets(data_files, START, END)
     X_train = process_data(X_train)
     X_train = mask_nan_hand(X_train)
     X_train = [normalize_coords(replace_nan(x)) for x in X_train]
+    print(len(X_train))
     mask = [x.shape == X_train[0].shape for x in X_train]
     X_train = [x for m, x in zip(mask, X_train) if m]
     y_train = [y for m, y in zip(mask, y_train) if m]
     X_train = np.array(X_train)
-    np.save(f'preprocessing/X_train{SEQUENCE_NUM}.npy', X_train)
-    np.save(f'preprocessing/y_train{SEQUENCE_NUM}.npy', y_train)
+    y_train = np.array(y_train)
+    print(X_train.shape, y_train.shape)
+    np.save(f'preprocessing/X_train{START}-{END}.npy', X_train)
+    np.save(f'preprocessing/y_train{START}-{END}.npy', y_train)
     
             
 

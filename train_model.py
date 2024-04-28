@@ -9,6 +9,7 @@ import models.cnn_1d_v2 as cnn_1d_v2
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import contextlib
+import logging
 from torchsummary import summary
 
 
@@ -25,10 +26,22 @@ NUM_LANDMARKS = 21
 HIDDEN_SIZE = 256
 NUM_LAYERS = 2
 
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
+
+handler = logging.FileHandler(f'{EXPERIMENT_NAME}.log')
+handler.setLevel(logging.INFO)
+
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+
+logger.addHandler(handler)
+
 def load_data():
     try:
-        X_train = np.load('../scratch/X_train_combined.npy')
-        y_train = np.load('../scratch/y_train_combined.npy')
+        X_train = np.load('scratch/X_train_combined.npy')
+        y_train = np.load('scratch/y_train_combined.npy')
     except:
         print('Data not found. Please run the preprocessing script first.')
         raise Exception('Data not found')
@@ -63,7 +76,7 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
             epoch_train_acc.append(train_acc)
         loss_list.append(sum(epoch_loss) / len(epoch_loss))
         train_acc_list.append(sum(epoch_train_acc) / len(epoch_train_acc))
-        print(f'Epoch {epoch + 1} Loss {loss_list[-1]} Accuracy {train_acc_list[-1]}')
+        logger.info(f'Epoch {epoch + 1} Loss {loss_list[-1]} Accuracy {train_acc_list[-1]}')
     return model, loss_list, train_acc_list
 
 def test_model(model, X_test, y_test, criterion):
@@ -81,7 +94,7 @@ def test_model(model, X_test, y_test, criterion):
     
 def generate_save_plots(experiment_name, train_loss, test_loss, train_accuracy, test_accuracy):
     train_accuracy = [acc.cpu().numpy() for acc in train_accuracy]
-    
+    logger.info(f'Test Loss {train_loss.item()} Accuracy {test_acc}')
     plt.figure()
     plt.plot(train_accuracy)
     plt.axhline(y=test_accuracy.detach().cpu().numpy(), color='r', linestyle='-', label='Test Accuracy')
@@ -101,21 +114,17 @@ def generate_save_plots(experiment_name, train_loss, test_loss, train_accuracy, 
     plt.savefig(f'{experiment_name}_train_test_loss.png')
 
 def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
-    with open(f'{experiment_name}_summary.txt', 'w') as f:
-        with contextlib.redirect_stdout(f):
-            print(summary(model, input_shape))
+    logger.info(summary(model, input_shape))
 
 if __name__ == '__main__':
-    X_data, y_data = load_data()
-    X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size=0.2)
-
-    print(f'X_data shape: {X_data.shape}')
-    print(f'y_data shape: {y_data.shape}')
-
-    print(f'X_train shape: {X_train.shape}')
-    print(f'y_train shape: {y_train.shape}')
-    print(f'X_test shape: {X_test.shape}')
-    print(f'y_test shape: {y_test.shape}')
+    X_train, y_train = load_data()
+    X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
+    
+    
+    logger.info(f'X_train shape: {X_train.shape}')
+    logger.info(f'y_train shape: {y_train.shape}')
+    logger.info(f'X_test shape: {X_test.shape}')
+    logger.info(f'y_test shape: {y_test.shape}')
 
     NN_model = base_nn.NN_model(X_train.shape[1] * X_train.shape[2], len(y_train[1])).to(device)
 
