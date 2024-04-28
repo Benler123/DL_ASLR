@@ -64,12 +64,16 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
             if MODEL_NAME == "NN": 
                 X_batch = X_batch.view(X_batch.shape[0], -1, X_batch.shape[1] * X_batch.shape[2])
             optimizer.zero_grad()
-
-            output = model(X_batch).squeeze()
+            if MODEL_NAME == "LSTM": 
+                output, l2_reg = model(X_batch)
+                loss = criterion(output.squeeze(), y_batch) + l2_reg
+            else: 
+                output = model(X_batch).squeeze()
+                loss = criterion(output, y_batch)
+                
             y_pred_train = torch.argmax(output, dim=1)
             y_actual_labels = torch.argmax(y_batch, dim=1)
             train_acc = (y_pred_train == y_actual_labels).float().mean()
-            loss = criterion(output, y_batch)
             loss.backward()
             optimizer.step()
 
