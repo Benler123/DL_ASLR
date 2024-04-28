@@ -8,7 +8,6 @@ Deep Learning CS 7643 Group Project
 
 - By default, conda creates new environments in the home directory at ~/.conda. However, conda environments can be quite large, and the allotted home directory has a relatively small storage quota.
   
-### ONE TIME SET UP:
 1. Log into PACE by running `ssh gburdell3@login-ice.pace.gatech.edu` (substitute your email). This will prompt you to log in using your GT password.
 2. First, check to see if you have an existing `~/.conda` directory or symlink by running:
     - `file ~/.conda`.
