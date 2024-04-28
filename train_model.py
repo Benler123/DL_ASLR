@@ -116,8 +116,8 @@ def test_model(model, X_test, y_test, criterion, batch_size):
             test_loss.append(loss.item())
             test_acc.append(batch_acc.item())
     
-    avg_test_loss = sum(test_loss) / len(test_loss)
-    avg_test_acc = sum(test_acc) / len(test_acc)
+    avg_test_loss = torch.mean(test_loss)
+    avg_test_acc = torch.mean(test_acc)
     
     logger.info(f'Test Loss {avg_test_loss} Accuracy {avg_test_acc}')
     
@@ -127,7 +127,7 @@ def generate_save_plots(experiment_name, train_loss, test_loss, train_accuracy, 
     train_accuracy = [acc.cpu().numpy() for acc in train_accuracy]
     plt.figure()
     plt.plot(train_accuracy)
-    plt.axhline(y=test_accuracy.cpu().numpy(), color='r', linestyle='-', label='Test Accuracy')
+    plt.axhline(y=test_accuracy.detach().cpu().numpy(), color='r', linestyle='-', label='Test Accuracy')
     plt.title('Training and Test Accuracy')
     plt.legend(['Train', 'Test'], loc='upper left')
     plt.xlabel('epoch')
@@ -136,7 +136,7 @@ def generate_save_plots(experiment_name, train_loss, test_loss, train_accuracy, 
 
     plt.figure()
     plt.plot(train_loss, label='Train Loss')
-    plt.axhline(y=test_loss.cpu().numpy(), color='r', linestyle='-', label='Test Loss')
+    plt.axhline(y=test_loss.detach().cpu().numpy(), color='r', linestyle='-', label='Test Loss')
     plt.title('Training and Test Loss')
     plt.legend(loc='upper right')
     plt.xlabel('epoch')
