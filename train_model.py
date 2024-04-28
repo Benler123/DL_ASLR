@@ -135,7 +135,7 @@ if __name__ == '__main__':
     if MODEL_NAME == "NN": 
         summarize_model(trained_model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
     if MODEL_NAME == "CNN": 
-        summarize_model(trained_model, NUM_LANDMARKS*2)
+        summarize_model(trained_model, (BATCH_SIZE, NUM_LANDMARKS*2))
     # optimizer = optim.Adam(NN_model.parameters(), lr=LEARNING_RATE)
     # model, loss, accuracy = train_model(NN_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
     # summarize_model(model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
