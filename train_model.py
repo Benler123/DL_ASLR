@@ -4,7 +4,8 @@ import torch.nn as nn
 import torch.optim as optim
 import models.base_nn as base_nn
 import models.lstm as lstm
-import models.cnn_1d as cnn_1d
+import models.cnn_1d_v1 as cnn_1d_v1
+import models.cnn_1d_v2 as cnn_1d_v2
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import contextlib
@@ -114,7 +115,8 @@ if __name__ == '__main__':
 
     LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYERS, output_classes=len(y_train[0])).to(device)
 
-    CNN_model = cnn_1d.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0])).to(device)
+    CNN_model = cnn_1d_v2.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0])).to(device)
+
     current_model = None
     if EXPERIMENT_NAME == "cnn_1d": 
         current_model = CNN_model
