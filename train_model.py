@@ -16,7 +16,7 @@ from torchsummary import summary
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-EPOCHS=20
+EPOCHS=1
 BATCH_SIZE=32
 MODEL_NAME = "LSTM"
 EXPERIMENT_NAME='lstm_LR=0.0005'
@@ -42,14 +42,12 @@ def load_data():
     try:
         X_train = np.load('scratch/X_train_combined.npy')
         y_train = np.load('scratch/y_train_combined.npy')
-        y_test = np.load('scratch/y_test.npy')
-        X_test = np.load('scratch/X_test.npy')
     except:
         print('Data not found. Please run the preprocessing script first.')
         raise Exception('Data not found')
     if MODEL_NAME == "CNN" or MODEL_NAME == "LSTM": 
         X_train = X_train.reshape(-1, NUM_FRAMES, NUM_LANDMARKS, 2)
-    return X_train, y_train, X_test, y_test
+    return X_train, y_train
 
 def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_size):
     loss_list = []
@@ -112,17 +110,17 @@ def generate_save_plots(experiment_name, loss, accuracy):
     plt.savefig(f'{experiment_name}_train_loss.png')
 
 def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
-    with open(f'{experiment_name}_summary.txt', 'w') as f:
-        with contextlib.redirect_stdout(f):
-            logger.info(summary(model, input_shape))
+    logger.info(summary(model, input_shape))
 
 if __name__ == '__main__':
-    X_train, y_train, X_test, y_test = load_data()
-
-    print(f'X_train shape: {X_train.shape}')
-    print(f'y_train shape: {y_train.shape}')
-    print(f'X_test shape: {X_test.shape}')
-    print(f'y_test shape: {y_test.shape}')
+    X_train, y_train = load_data()
+    X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
+    
+    
+    logger.info(f'X_train shape: {X_train.shape}')
+    logger.info(f'y_train shape: {y_train.shape}')
+    logger.info(f'X_test shape: {X_test.shape}')
+    logger.info(f'y_test shape: {y_test.shape}')
 
     NN_model = base_nn.NN_model(X_train.shape[1] * X_train.shape[2], len(y_train[1])).to(device)
 
