@@ -35,7 +35,7 @@ DROPOUT_PROB = 0.7
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
-handler = logging.FileHandler(f'/logs/{EXPERIMENT_NAME}.log')
+handler = logging.FileHandler(f'logs/{EXPERIMENT_NAME}.log')
 handler.setLevel(logging.INFO)
 
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
