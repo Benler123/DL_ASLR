@@ -15,7 +15,7 @@ class LSTM_model(nn.Module):
         self.fc = nn.Linear(hidden_size, output_classes)
     
     def forward(self, x):
-        print(x.shape)
+        print(type(x))
         batch_size, sequence_length, num_landmarks, _ = x.shape
         x = x.view(batch_size, sequence_length, -1)
         
