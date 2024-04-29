@@ -199,5 +199,5 @@ if __name__ == '__main__':
     if MODEL_NAME == "CNN": 
         summarize_model(trained_model, (NUM_FRAMES, NUM_LANDMARKS * 2))
     if MODEL_NAME == "LSTM": 
-        summarize_model(trained_model,  (BATCH_SIZE, NUM_FRAMES, NUM_LANDMARKS*2))
+        summarize_model(trained_model,  (NUM_FRAMES, NUM_LANDMARKS, 2))
 
