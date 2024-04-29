@@ -21,7 +21,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
 
-EPOCHS=10
+EPOCHS=1
 BATCH_SIZE=32
 MODEL_NAME = "LSTM"
 EXPERIMENT_NAME='lstm_double'
@@ -199,5 +199,5 @@ if __name__ == '__main__':
     if MODEL_NAME == "CNN": 
         summarize_model(trained_model, (NUM_FRAMES, NUM_LANDMARKS * 2))
     if MODEL_NAME == "LSTM": 
-        summarize_model(trained_model,  (BATCH_SIZE, NUM_FRAMES, NUM_LANDMARKS, 2))
+        summarize_model(trained_model,  (NUM_LANDMARKS, 2))
 

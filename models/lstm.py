@@ -18,7 +18,7 @@ class LSTM_model(nn.Module):
         batch_size, sequence_length, num_landmarks, _ = x.size()
         print(x.shape)
         x = x.view(batch_size, sequence_length, -1)
-        print(x.shape)
+        
         
         h0 = torch.zeros(self.num_layers, batch_size, self.hidden_size).to(x.device)
         c0 = torch.zeros(self.num_layers, batch_size, self.hidden_size).to(x.device)
