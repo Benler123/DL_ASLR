@@ -21,7 +21,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
 
-EPOCHS=1
+EPOCHS=0
 BATCH_SIZE=32
 MODEL_NAME = "LSTM"
 EXPERIMENT_NAME='lstm_double'
