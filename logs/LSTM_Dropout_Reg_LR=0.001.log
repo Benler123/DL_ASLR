@@ -1,0 +1,14 @@
+2024-04-30 18:49:11,998 - __main__ - INFO - Model Name: CNNv1
+2024-04-30 18:49:11,999 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout_LR_0.001
+2024-04-30 18:49:11,999 - __main__ - INFO - Epochs: 2
+2024-04-30 18:49:11,999 - __main__ - INFO - Batch Size: 32
+2024-04-30 18:49:11,999 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 18:50:05,960 - __main__ - INFO - Model Name: CNNv1
+2024-04-30 18:50:05,961 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout_LR_0.001
+2024-04-30 18:50:05,961 - __main__ - INFO - Epochs: 2
+2024-04-30 18:50:05,961 - __main__ - INFO - Batch Size: 32
+2024-04-30 18:50:05,961 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 18:50:08,745 - __main__ - INFO - X_train shape: (75580, 1260, 2)
+2024-04-30 18:50:08,755 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 18:50:08,755 - __main__ - INFO - X_test shape: (18896, 1260, 2)
+2024-04-30 18:50:08,755 - __main__ - INFO - y_test shape: (18896, 250)
