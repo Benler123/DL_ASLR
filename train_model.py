@@ -22,10 +22,10 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
 
-EPOCHS=10
+EPOCHS=25
 BATCH_SIZE=32
 MODEL_NAME = "LSTM"
-EXPERIMENT_NAME='LSTM_Reg_Dropout'
+EXPERIMENT_NAME='LSTM_Dropout_Reg_LR=0.001'
 LEARNING_RATE=0.001
 LSTM_HIDDEN_SIZE = 256
 LSTM_NUM_LAYERS = 2
@@ -97,14 +97,14 @@ def train_model(model, X_train, y_train, X_test, y_test, criterion, optimizer, e
         val_loss, val_acc = test_model(model, X_val, y_val, criterion, BATCH_SIZE)
         val_acc_list.append(val_acc)
         val_loss_list.append(val_loss)
-        loss_list.append(epoch_loss[-1])
-        train_acc_list.append(epoch_train_acc[-1])
+        loss_list.append(sum(epoch_loss) / len(epoch_loss))
+        train_acc_list.append(sum(epoch_train_acc) / len(epoch_train_acc))
         logger.info(f'Epoch {epoch + 1} Loss {loss_list[-1]} Accuracy {train_acc_list[-1]}')
     return model, loss_list, train_acc_list, val_acc_list, val_loss_list
 
 def generate_save_plots(experiment_name, loss, accuracy, val_loss, val_acc):
-    accuracy = [acc for acc in accuracy]
-    val_acc = [acc for acc in val_acc]
+    accuracy = [acc.cpu().numpy() for acc in accuracy]
+
     plt.figure()
     plt.plot(accuracy)
     plt.plot(val_acc)

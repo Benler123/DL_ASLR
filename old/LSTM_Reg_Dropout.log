@@ -1,0 +1,190 @@
+2024-04-30 16:50:56,489 - __main__ - INFO - Model Name: LSTM
+2024-04-30 16:50:56,489 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout
+2024-04-30 16:50:56,489 - __main__ - INFO - Epochs: 10
+2024-04-30 16:50:56,490 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:50:56,490 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:50:56,491 - __main__ - INFO - LSTM Hidden Size: 256
+2024-04-30 16:50:56,491 - __main__ - INFO - LSTM Number of Layers: 2
+2024-04-30 16:50:56,492 - __main__ - INFO - LSTM Weight Decay: 0.001
+2024-04-30 16:50:56,492 - __main__ - INFO - LSTM Dropout Probability: 0.5
+2024-04-30 16:52:12,059 - __main__ - INFO - Model Name: LSTM
+2024-04-30 16:52:12,059 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout
+2024-04-30 16:52:12,059 - __main__ - INFO - Epochs: 10
+2024-04-30 16:52:12,060 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:52:12,061 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:52:12,061 - __main__ - INFO - LSTM Hidden Size: 256
+2024-04-30 16:52:12,062 - __main__ - INFO - LSTM Number of Layers: 2
+2024-04-30 16:52:12,062 - __main__ - INFO - LSTM Weight Decay: 0.001
+2024-04-30 16:52:12,063 - __main__ - INFO - LSTM Dropout Probability: 0.5
+2024-04-30 17:00:24,603 - __main__ - INFO - Model Name: LSTM
+2024-04-30 17:00:24,604 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout
+2024-04-30 17:00:24,604 - __main__ - INFO - Epochs: 10
+2024-04-30 17:00:24,604 - __main__ - INFO - Batch Size: 32
+2024-04-30 17:00:24,604 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 17:00:24,605 - __main__ - INFO - LSTM Hidden Size: 256
+2024-04-30 17:00:24,605 - __main__ - INFO - LSTM Number of Layers: 2
+2024-04-30 17:00:24,605 - __main__ - INFO - LSTM Weight Decay: 0.001
+2024-04-30 17:00:24,606 - __main__ - INFO - LSTM Dropout Probability: 0.5
+2024-04-30 17:04:42,101 - __main__ - INFO - Model Name: LSTM
+2024-04-30 17:04:42,101 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout
+2024-04-30 17:04:42,101 - __main__ - INFO - Epochs: 10
+2024-04-30 17:04:42,102 - __main__ - INFO - Batch Size: 32
+2024-04-30 17:04:42,102 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 17:04:42,102 - __main__ - INFO - LSTM Hidden Size: 256
+2024-04-30 17:04:42,102 - __main__ - INFO - LSTM Number of Layers: 2
+2024-04-30 17:04:42,103 - __main__ - INFO - LSTM Weight Decay: 0.001
+2024-04-30 17:04:42,103 - __main__ - INFO - LSTM Dropout Probability: 0.5
+<<<<<<< HEAD
+2024-04-30 17:06:23,851 - __main__ - INFO - Model Name: LSTM
+2024-04-30 17:06:23,852 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout
+2024-04-30 17:06:23,852 - __main__ - INFO - Epochs: 10
+2024-04-30 17:06:23,852 - __main__ - INFO - Batch Size: 32
+2024-04-30 17:06:23,852 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 17:06:23,852 - __main__ - INFO - LSTM Hidden Size: 256
+2024-04-30 17:06:23,852 - __main__ - INFO - LSTM Number of Layers: 2
+2024-04-30 17:06:23,852 - __main__ - INFO - LSTM Weight Decay: 0.001
+2024-04-30 17:06:23,852 - __main__ - INFO - LSTM Dropout Probability: 0.5
+2024-04-30 17:06:25,308 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
+2024-04-30 17:06:25,308 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 17:06:25,308 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
+2024-04-30 17:06:25,308 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 17:07:11,276 - __main__ - INFO - Test Loss 4.478603839874268 Accuracy 0.125
+2024-04-30 17:07:11,277 - __main__ - INFO - Epoch 1 Loss 4.506441116333008 Accuracy 0.1428571492433548
+2024-04-30 17:07:54,462 - __main__ - INFO - Test Loss 3.3436808586120605 Accuracy 0.21875
+2024-04-30 17:07:54,463 - __main__ - INFO - Epoch 2 Loss 4.1395955085754395 Accuracy 0.0714285746216774
+2024-04-30 17:08:37,406 - __main__ - INFO - Test Loss 3.210888624191284 Accuracy 0.21875
+2024-04-30 17:08:37,407 - __main__ - INFO - Epoch 3 Loss 3.518813133239746 Accuracy 0.2857142984867096
+2024-04-30 17:09:20,204 - __main__ - INFO - Test Loss 2.6533312797546387 Accuracy 0.4375
+2024-04-30 17:09:20,205 - __main__ - INFO - Epoch 4 Loss 3.311525821685791 Accuracy 0.3571428656578064
+2024-04-30 17:10:02,943 - __main__ - INFO - Test Loss 2.97456431388855 Accuracy 0.34375
+2024-04-30 17:10:02,944 - __main__ - INFO - Epoch 5 Loss 2.885387897491455 Accuracy 0.392857164144516
+2024-04-30 17:10:45,539 - __main__ - INFO - Test Loss 3.2483980655670166 Accuracy 0.25
+2024-04-30 17:10:45,540 - __main__ - INFO - Epoch 6 Loss 2.564781904220581 Accuracy 0.5
+2024-04-30 17:11:28,133 - __main__ - INFO - Test Loss 3.412193775177002 Accuracy 0.375
+2024-04-30 17:11:28,133 - __main__ - INFO - Epoch 7 Loss 2.8654260635375977 Accuracy 0.392857164144516
+2024-04-30 17:12:10,657 - __main__ - INFO - Test Loss 2.4472131729125977 Accuracy 0.46875
+2024-04-30 17:12:10,658 - __main__ - INFO - Epoch 8 Loss 2.618046998977661 Accuracy 0.4285714626312256
+2024-04-30 17:12:53,188 - __main__ - INFO - Test Loss 3.0519800186157227 Accuracy 0.40625
+2024-04-30 17:12:53,189 - __main__ - INFO - Epoch 9 Loss 2.53542423248291 Accuracy 0.5
+2024-04-30 17:13:35,741 - __main__ - INFO - Test Loss 2.499809741973877 Accuracy 0.5625
+2024-04-30 17:13:35,742 - __main__ - INFO - Epoch 10 Loss 2.4490628242492676 Accuracy 0.5714285969734192
+2024-04-30 17:13:40,096 - __main__ - INFO - Test Loss 2.764355164494006 Accuracy 0.45970812182741116
+2024-04-30 17:16:18,200 - __main__ - INFO - Model Name: LSTM
+2024-04-30 17:16:18,200 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout
+2024-04-30 17:16:18,200 - __main__ - INFO - Epochs: 3
+2024-04-30 17:16:18,201 - __main__ - INFO - Batch Size: 32
+2024-04-30 17:16:18,201 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 17:16:18,201 - __main__ - INFO - LSTM Hidden Size: 256
+2024-04-30 17:16:18,201 - __main__ - INFO - LSTM Number of Layers: 2
+2024-04-30 17:16:18,201 - __main__ - INFO - LSTM Weight Decay: 0.001
+2024-04-30 17:16:18,201 - __main__ - INFO - LSTM Dropout Probability: 0.5
+2024-04-30 17:16:19,575 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
+2024-04-30 17:16:19,575 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 17:16:19,576 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
+2024-04-30 17:16:19,576 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 17:17:05,214 - __main__ - INFO - Test Loss 4.065284252166748 Accuracy 0.15625
+2024-04-30 17:17:05,215 - __main__ - INFO - Epoch 1 Loss 4.7067155838012695 Accuracy 0.1071428656578064
+2024-04-30 17:17:48,128 - __main__ - INFO - Test Loss 3.5274569988250732 Accuracy 0.15625
+2024-04-30 17:17:48,129 - __main__ - INFO - Epoch 2 Loss 3.9029486179351807 Accuracy 0.1428571492433548
+2024-04-30 17:18:30,921 - __main__ - INFO - Test Loss 3.4430410861968994 Accuracy 0.25
+2024-04-30 17:18:30,922 - __main__ - INFO - Epoch 3 Loss 3.588778495788574 Accuracy 0.25
+2024-04-30 17:18:35,248 - __main__ - INFO - Test Loss 3.4968236158341925 Accuracy 0.25846023688663283
+2024-04-30 17:25:16,661 - __main__ - INFO - Model Name: LSTM
+2024-04-30 17:25:16,662 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout
+2024-04-30 17:25:16,662 - __main__ - INFO - Epochs: 1
+2024-04-30 17:25:16,662 - __main__ - INFO - Batch Size: 32
+2024-04-30 17:25:16,662 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 17:25:16,662 - __main__ - INFO - LSTM Hidden Size: 256
+2024-04-30 17:25:16,662 - __main__ - INFO - LSTM Number of Layers: 2
+2024-04-30 17:25:16,662 - __main__ - INFO - LSTM Weight Decay: 0.001
+2024-04-30 17:25:16,662 - __main__ - INFO - LSTM Dropout Probability: 0.5
+2024-04-30 17:25:18,044 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
+2024-04-30 17:25:18,044 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 17:25:18,044 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
+2024-04-30 17:25:18,044 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 17:26:03,773 - __main__ - INFO - Test Loss 4.88612174987793 Accuracy 0.0625
+2024-04-30 17:26:03,773 - __main__ - INFO - Epoch 1 Loss 4.952630996704102 Accuracy 0.0357142873108387
+2024-04-30 17:26:08,186 - __main__ - INFO - Test Loss 4.840756008871114 Accuracy 0.06091370558375635
+2024-04-30 17:39:56,433 - __main__ - INFO - Model Name: LSTM
+2024-04-30 17:39:56,433 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout
+2024-04-30 17:39:56,433 - __main__ - INFO - Epochs: 1
+2024-04-30 17:39:56,433 - __main__ - INFO - Batch Size: 32
+2024-04-30 17:39:56,433 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 17:39:56,433 - __main__ - INFO - LSTM Hidden Size: 256
+2024-04-30 17:39:56,433 - __main__ - INFO - LSTM Number of Layers: 2
+2024-04-30 17:39:56,433 - __main__ - INFO - LSTM Weight Decay: 0.001
+2024-04-30 17:39:56,433 - __main__ - INFO - LSTM Dropout Probability: 0.5
+2024-04-30 17:39:57,812 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
+2024-04-30 17:39:57,812 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 17:39:57,812 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
+2024-04-30 17:39:57,812 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 17:40:43,956 - __main__ - INFO - Test Loss 4.67161750793457 Accuracy 0.03125
+2024-04-30 17:40:43,956 - __main__ - INFO - Epoch 1 Loss 4.9259419441223145 Accuracy 0.0357142873108387
+2024-04-30 17:40:48,373 - __main__ - INFO - Test Loss 4.549177946374702 Accuracy 0.08365059221658207
+2024-04-30 17:41:20,116 - __main__ - INFO - Model Name: LSTM
+2024-04-30 17:41:20,116 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout
+2024-04-30 17:41:20,117 - __main__ - INFO - Epochs: 1
+2024-04-30 17:41:20,117 - __main__ - INFO - Batch Size: 32
+2024-04-30 17:41:20,117 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 17:41:20,117 - __main__ - INFO - LSTM Hidden Size: 256
+2024-04-30 17:41:20,117 - __main__ - INFO - LSTM Number of Layers: 2
+2024-04-30 17:41:20,117 - __main__ - INFO - LSTM Weight Decay: 0.001
+2024-04-30 17:41:20,117 - __main__ - INFO - LSTM Dropout Probability: 0.5
+2024-04-30 17:41:21,498 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
+2024-04-30 17:41:21,498 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 17:41:21,498 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
+2024-04-30 17:41:21,498 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 17:42:07,288 - __main__ - INFO - Test Loss 4.405308246612549 Accuracy 0.09375
+2024-04-30 17:42:07,289 - __main__ - INFO - Epoch 1 Loss 4.792967796325684 Accuracy 0.1071428656578064
+2024-04-30 17:42:11,688 - __main__ - INFO - Test Loss 4.605540670920951 Accuracy 0.07133037225042302
+2024-04-30 17:42:14,309 - __main__ - INFO - LOSS OVER EPOCHS: [4.792967796325684] ACCURACY OVER EPOCHS: [tensor(0.1071, device='cuda:0')] VAL ACCURACY OVER EPOCHS: [0.09375] VAL LOSS OVER EPOCHS: [4.405308246612549]
+2024-04-30 17:43:58,199 - __main__ - INFO - Model Name: LSTM
+2024-04-30 17:43:58,199 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout
+2024-04-30 17:43:58,199 - __main__ - INFO - Epochs: 10
+2024-04-30 17:43:58,199 - __main__ - INFO - Batch Size: 32
+2024-04-30 17:43:58,199 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 17:43:58,199 - __main__ - INFO - LSTM Hidden Size: 256
+2024-04-30 17:43:58,199 - __main__ - INFO - LSTM Number of Layers: 2
+2024-04-30 17:43:58,199 - __main__ - INFO - LSTM Weight Decay: 0.001
+2024-04-30 17:43:58,199 - __main__ - INFO - LSTM Dropout Probability: 0.5
+2024-04-30 17:43:59,583 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
+2024-04-30 17:43:59,583 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 17:43:59,583 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
+2024-04-30 17:43:59,583 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 17:44:45,421 - __main__ - INFO - Test Loss 4.939155101776123 Accuracy 0.0625
+2024-04-30 17:44:45,421 - __main__ - INFO - Epoch 1 Loss 4.575509548187256 Accuracy 0.0714285746216774
+2024-04-30 17:45:28,474 - __main__ - INFO - Test Loss 4.071563243865967 Accuracy 0.15625
+2024-04-30 17:45:28,475 - __main__ - INFO - Epoch 2 Loss 4.131282329559326 Accuracy 0.1785714328289032
+2024-04-30 17:46:11,488 - __main__ - INFO - Test Loss 3.3930747509002686 Accuracy 0.34375
+2024-04-30 17:46:11,488 - __main__ - INFO - Epoch 3 Loss 3.688955307006836 Accuracy 0.1785714328289032
+2024-04-30 17:46:54,336 - __main__ - INFO - Test Loss 4.014338493347168 Accuracy 0.125
+2024-04-30 17:46:54,337 - __main__ - INFO - Epoch 4 Loss 3.261139154434204 Accuracy 0.2142857313156128
+2024-04-30 17:47:37,229 - __main__ - INFO - Test Loss 3.0546720027923584 Accuracy 0.375
+2024-04-30 17:47:37,230 - __main__ - INFO - Epoch 5 Loss 2.8615782260894775 Accuracy 0.4285714626312256
+2024-04-30 17:48:19,992 - __main__ - INFO - Test Loss 3.4004178047180176 Accuracy 0.375
+2024-04-30 17:48:19,993 - __main__ - INFO - Epoch 6 Loss 3.0505738258361816 Accuracy 0.392857164144516
+2024-04-30 17:49:02,753 - __main__ - INFO - Test Loss 2.677912712097168 Accuracy 0.40625
+2024-04-30 17:49:02,754 - __main__ - INFO - Epoch 7 Loss 2.848498821258545 Accuracy 0.5
+2024-04-30 17:49:45,496 - __main__ - INFO - Test Loss 3.1405441761016846 Accuracy 0.40625
+2024-04-30 17:49:45,497 - __main__ - INFO - Epoch 8 Loss 2.9566848278045654 Accuracy 0.392857164144516
+2024-04-30 17:50:28,305 - __main__ - INFO - Test Loss 2.8951478004455566 Accuracy 0.40625
+2024-04-30 17:50:28,305 - __main__ - INFO - Epoch 9 Loss 3.0337069034576416 Accuracy 0.392857164144516
+2024-04-30 17:51:11,041 - __main__ - INFO - Test Loss 3.094442844390869 Accuracy 0.46875
+2024-04-30 17:51:11,041 - __main__ - INFO - Epoch 10 Loss 2.4405107498168945 Accuracy 0.4642857313156128
+2024-04-30 17:51:15,336 - __main__ - INFO - Test Loss 2.744790742441684 Accuracy 0.4654716582064298
+2024-04-30 17:51:15,701 - __main__ - INFO - LOSS OVER EPOCHS: [4.575509548187256, 4.131282329559326, 3.688955307006836, 3.261139154434204, 2.8615782260894775, 3.0505738258361816, 2.848498821258545, 2.9566848278045654, 3.0337069034576416, 2.4405107498168945] ACCURACY OVER EPOCHS: [tensor(0.0714, device='cuda:0'), tensor(0.1786, device='cuda:0'), tensor(0.1786, device='cuda:0'), tensor(0.2143, device='cuda:0'), tensor(0.4286, device='cuda:0'), tensor(0.3929, device='cuda:0'), tensor(0.5000, device='cuda:0'), tensor(0.3929, device='cuda:0'), tensor(0.3929, device='cuda:0'), tensor(0.4643, device='cuda:0')] VAL ACCURACY OVER EPOCHS: [0.0625, 0.15625, 0.34375, 0.125, 0.375, 0.375, 0.40625, 0.40625, 0.40625, 0.46875] VAL LOSS OVER EPOCHS: [4.939155101776123, 4.071563243865967, 3.3930747509002686, 4.014338493347168, 3.0546720027923584, 3.4004178047180176, 2.677912712097168, 3.1405441761016846, 2.8951478004455566, 3.094442844390869]
+=======
+2024-04-30 17:29:39,496 - __main__ - INFO - Model Name: LSTM
+2024-04-30 17:29:39,497 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout
+2024-04-30 17:29:39,497 - __main__ - INFO - Epochs: 10
+2024-04-30 17:29:39,497 - __main__ - INFO - Batch Size: 32
+2024-04-30 17:29:39,497 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 17:29:39,497 - __main__ - INFO - LSTM Hidden Size: 256
+2024-04-30 17:29:39,497 - __main__ - INFO - LSTM Number of Layers: 2
+2024-04-30 17:29:39,497 - __main__ - INFO - LSTM Weight Decay: 0.001
+2024-04-30 17:29:39,497 - __main__ - INFO - LSTM Dropout Probability: 0.5
+2024-04-30 17:29:42,690 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
+2024-04-30 17:29:42,690 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 17:29:42,690 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
+2024-04-30 17:29:42,690 - __main__ - INFO - y_test shape: (18896, 250)
+>>>>>>> origin/main
