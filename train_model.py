@@ -16,10 +16,10 @@ from torchsummary import summary
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-EPOCHS=1
+EPOCHS=5
 BATCH_SIZE=32
 MODEL_NAME = "NN"
-EXPERIMENT_NAME='NN_1'
+EXPERIMENT_NAME='test_experiment'
 LEARNING_RATE=0.0005
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
@@ -40,8 +40,8 @@ logger.addHandler(handler)
 
 def load_data():
     try:
-        X_train = np.load('../scratch/X_train_combined.npy')
-        y_train = np.load('../scratch/y_train_combined.npy')
+        X_train = np.load('scratch/X_train_combined.npy')
+        y_train = np.load('scratch/y_train_combined.npy')
     except:
         print('Data not found. Please run the preprocessing script first.')
         raise Exception('Data not found')
@@ -49,9 +49,11 @@ def load_data():
         X_train = X_train.reshape(-1, NUM_FRAMES, NUM_LANDMARKS, 2)
     return X_train, y_train
 
-def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_size):
+def train_model(model, X_train, y_train, X_test, Y_test, criterion, optimizer, epochs, batch_size):
     loss_list = []
     train_acc_list = []
+    val_acc_list = []
+    val_loss_list = []
     for epoch in range(epochs):
         epoch_loss = []
         epoch_train_acc = []
@@ -71,13 +73,20 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
             loss = criterion(output, y_batch)
             loss.backward()
             optimizer.step()
-
             epoch_loss.append(loss.item())
             epoch_train_acc.append(train_acc)
+        val_indices = np.random.choice(len(X_test), batch_size)
+        X_val = X_test[val_indices]
+        y_val = y_test[val_indices]
+        X_val = torch.tensor(X_val, dtype=torch.float32).to(device)
+        y_val = torch.tensor(y_val, dtype=torch.float32).to(device)
+        val_loss, val_acc = test_model(model, X_val, y_val, criterion)
+        val_acc_list.append(val_acc)
+        val_loss_list.append(val_loss.item())
         loss_list.append(sum(epoch_loss) / len(epoch_loss))
         train_acc_list.append(sum(epoch_train_acc) / len(epoch_train_acc))
         logger.info(f'Epoch {epoch + 1} Loss {loss_list[-1]} Accuracy {train_acc_list[-1]}')
-    return model, loss_list, train_acc_list
+    return model, loss_list, train_acc_list, val_acc_list, val_loss_list
 
 def test_model(model, X_test, y_test, criterion):
     X_test = torch.tensor(X_test, dtype=torch.float32).to(device)
@@ -90,24 +99,28 @@ def test_model(model, X_test, y_test, criterion):
     test_acc = (y_pred_test == y_actual_labels).float().mean()
     loss = criterion(output, y_test)
     logger.info(f'Test Loss {loss.item()} Accuracy {test_acc}')
+    return loss, test_acc
 
-def generate_save_plots(experiment_name, loss, accuracy):
+def generate_save_plots(experiment_name, loss, accuracy, val_loss, val_acc):
     accuracy = [acc.cpu().numpy() for acc in accuracy]
+    val_acc = [acc.cpu().numpy() for acc in val_acc]
     plt.figure()
     plt.plot(accuracy)
+    plt.plot(val_acc)
     plt.title('Training Accuracy')
-    plt.legend(['train'], loc='upper left')
+    plt.legend(['train', 'validation'], loc='upper left')
     plt.xlabel('epoch')
     plt.ylabel('accuracy')
-    plt.savefig(f'{experiment_name}_train_acc.png')
+    plt.savefig(f'plots/{experiment_name}_train_acc.png')
 
     plt.figure()
     plt.plot(loss)
+    plt.plot(val_loss)
     plt.title('Training Loss')
-    plt.legend(['train'], loc='upper right')
+    plt.legend(['train', 'validation'], loc='upper left')
     plt.xlabel('epoch')
     plt.ylabel('loss')
-    plt.savefig(f'{experiment_name}_train_loss.png')
+    plt.savefig(f'plots/{experiment_name}_train_loss.png')
 
 def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
     with open(f'{experiment_name}.log', 'a') as f:
@@ -141,9 +154,10 @@ if __name__ == '__main__':
         
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(current_model.parameters(), lr=LEARNING_RATE)
-    trained_model, loss, accuracy = train_model(current_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
+    trained_model, loss, accuracy, val_acc, val_loss = train_model(current_model, X_train, y_train, X_test, y_test, criterion, optimizer, EPOCHS, BATCH_SIZE)
     test_model(trained_model, X_test, y_test, criterion)
-    generate_save_plots(EXPERIMENT_NAME, loss, accuracy)
+    generate_save_plots(EXPERIMENT_NAME, loss, accuracy, val_loss, val_acc)
+    logger.info(f"LOSS OVER EPOCHS: {loss} ACCURACY OVER EPOCHS: {accuracy}")
     if MODEL_NAME == "NN": 
         summarize_model(trained_model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
     if MODEL_NAME == "CNN": 
