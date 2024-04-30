@@ -12,8 +12,8 @@ import contextlib
 import logging
 from torchsummary import summary
 import gc
-
-
+import configparser
+import argparse
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -21,10 +21,10 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
 
-EPOCHS=2
+EPOCHS=1
 BATCH_SIZE=32
-MODEL_NAME = "NN"
-EXPERIMENT_NAME='Base_Neural_Network'
+MODEL_NAME = "LSTM"
+EXPERIMENT_NAME='LSTM_TEST'
 LEARNING_RATE=0.001
 LSTM_HIDDEN_SIZE = 256
 LSTM_NUM_LAYERS = 2
@@ -130,8 +130,9 @@ def test_model(model, X_test, y_test, criterion, batch_size):
         for i in range(0, len(X_test), batch_size):
             X_batch = X_test[i:i+batch_size]
             y_batch = y_test[i:i+batch_size]
-            X_batch = torch.tensor(X_batch, dtype=torch.float32).to(device)
-            y_batch = torch.tensor(y_batch, dtype=torch.float32).to(device)
+            if not isinstance(X_batch, torch.Tensor):
+                X_batch = torch.tensor(X_batch, dtype=torch.float32).to(device)
+                y_batch = torch.tensor(y_batch, dtype=torch.float32).to(device)
             
             if MODEL_NAME == "NN":
                 X_batch = X_batch.view(X_batch.shape[0], -1, X_batch.shape[1] * X_batch.shape[2])
@@ -164,8 +165,28 @@ def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
         with contextlib.redirect_stdout(f):
             summary(model, input_shape)
         
+def pass_in_config():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config', type=str, default='config.ini', help='Path to config file')
+    args = parser.parse_args()
+    return args.config
 
+def parse_arguments():
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    
+    model = config['DEFAULT']['MODEL']
+    experiment_name = config['DEFAULT']['EXPERIMENT_NAME']
+    epochs = int(config['DEFAULT']['EPOCHS'])
+    batch_size = int(config['DEFAULT']['BATCH_SIZE'])
+    learning_rate = float(config['DEFAULT']['LEARNING_RATE'])
+    lstm_hidden_size = int(config['DEFAULT']['LSTM_HIDDEN_SIZE'])
+    lstm_num_layers = int(config['DEFAULT']['LSTM_NUM_LAYERS'])
+    lstm_weight_decay = float(config['DEFAULT']['LSTM_WEIGHT_DECAY'])
+    lstm_dropout_prob = float(config['DEFAULT']['LSTM_DROPOUT_PROB'])
+    return model, experiment_name, epochs, batch_size, learning_rate, lstm_hidden_size, lstm_num_layers, lstm_weight_decay, lstm_dropout_prob
 if __name__ == '__main__':
+    MODEL_NAME, EXPERIMENT_NAME, EPOCHS, BATCH_SIZE, LEARNING_RATE, LSTM_HIDDEN_SIZE, LSTM_NUM_LAYERS, LSTM_WEIGHT_DECAY, LSTM_DROPOUT_PROB = parse_arguments()
     gc.collect()
     torch.cuda.empty_cache()
     logger.info(f'Model Name: {MODEL_NAME}')
