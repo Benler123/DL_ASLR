@@ -15,7 +15,6 @@ class LSTM_model(nn.Module):
         self.fc = nn.Linear(hidden_size, output_classes)
     
     def forward(self, x):
-        print(type(x))
         batch_size, sequence_length, num_landmarks, _ = x.shape
         x = x.view(batch_size, sequence_length, -1)
         
@@ -23,7 +22,6 @@ class LSTM_model(nn.Module):
         c0 = torch.zeros(self.num_layers, batch_size, self.hidden_size).to(x.device)
         
         out, (_, _) = self.lstm1(x, (h0, c0))
-        print(type(out))
         out = self.dropout(out)
         out, (_, _) = self.lstm2(out, (h0, c0))
         out = self.fc(out[:, -1, :])

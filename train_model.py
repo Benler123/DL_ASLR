@@ -21,15 +21,15 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
 
-EPOCHS=0
+EPOCHS=20
 BATCH_SIZE=32
 MODEL_NAME = "LSTM"
-EXPERIMENT_NAME='lstm_double'
+EXPERIMENT_NAME='lstm_new'
 LEARNING_RATE=0.001
 LSTM_HIDDEN_SIZE = 256
 LSTM_NUM_LAYERS = 2
 LSTM_WEIGHT_DECAY = 0.001
-LSTM_DROPOUT_PROB = 0.7
+LSTM_DROPOUT_PROB = 0.5
 
 
 logger = logging.getLogger(__name__)
