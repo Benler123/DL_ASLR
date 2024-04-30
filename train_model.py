@@ -21,10 +21,17 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
 
+<<<<<<< HEAD
 EPOCHS=20
 BATCH_SIZE=32
 MODEL_NAME = "LSTM"
 EXPERIMENT_NAME='lstm_new'
+=======
+EPOCHS=2
+BATCH_SIZE=32
+MODEL_NAME = "NN"
+EXPERIMENT_NAME='Base_Neural_Network'
+>>>>>>> fcd85e74aa95f87b6c61fb86577ef808c912947d
 LEARNING_RATE=0.001
 LSTM_HIDDEN_SIZE = 256
 LSTM_NUM_LAYERS = 2
@@ -45,8 +52,8 @@ logger.addHandler(handler)
 
 def load_data():
     try:
-        X_train = np.load('../scratch/X_train_combined.npy')
-        y_train = np.load('../scratch/y_train_combined.npy')
+        X_train = np.load('scratch/X_train_combined.npy')
+        y_train = np.load('scratch/y_train_combined.npy')
     except:
         try:
             X_train = np.load('preprocessing/X_train_combined.npy')
@@ -58,9 +65,11 @@ def load_data():
         X_train = X_train.reshape(-1, NUM_FRAMES, NUM_LANDMARKS, 2)
     return X_train, y_train
 
-def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_size):
+def train_model(model, X_train, y_train, X_test, y_test, criterion, optimizer, epochs, batch_size):
     loss_list = []
     train_acc_list = []
+    val_acc_list = []
+    val_loss_list = []
     for epoch in range(epochs):
         epoch_loss = []
         epoch_train_acc = []
@@ -84,13 +93,41 @@ def train_model(model, X_train, y_train, criterion, optimizer, epochs, batch_siz
             train_acc = (y_pred_train == y_actual_labels).float().mean()
             loss.backward()
             optimizer.step()
-
             epoch_loss.append(loss.item())
             epoch_train_acc.append(train_acc)
-        loss_list.append(sum(epoch_loss) / len(epoch_loss))
-        train_acc_list.append(sum(epoch_train_acc) / len(epoch_train_acc))
+        val_indices = np.random.choice(len(X_test), batch_size)
+        X_val = X_test[val_indices]
+        y_val = y_test[val_indices]
+        X_val = torch.tensor(X_val, dtype=torch.float32).to(device)
+        y_val = torch.tensor(y_val, dtype=torch.float32).to(device)
+        val_loss, val_acc = test_model(model, X_val, y_val, criterion, BATCH_SIZE)
+        val_acc_list.append(val_acc)
+        val_loss_list.append(val_loss)
+        loss_list.append(epoch_loss[-1])
+        train_acc_list.append(epoch_train_acc[-1])
         logger.info(f'Epoch {epoch + 1} Loss {loss_list[-1]} Accuracy {train_acc_list[-1]}')
-    return model, loss_list, train_acc_list
+    return model, loss_list, train_acc_list, val_acc_list, val_loss_list
+
+def generate_save_plots(experiment_name, loss, accuracy, val_loss, val_acc):
+    accuracy = [acc for acc in accuracy]
+    val_acc = [acc for acc in val_acc]
+    plt.figure()
+    plt.plot(accuracy)
+    plt.plot(val_acc)
+    plt.title('Training Accuracy')
+    plt.legend(['train', 'validation'], loc='upper left')
+    plt.xlabel('epoch')
+    plt.ylabel('accuracy')
+    plt.savefig(f'plots/{experiment_name}_train_acc.png')
+
+    plt.figure()
+    plt.plot(loss)
+    plt.plot(val_loss)
+    plt.title('Training Loss')
+    plt.legend(['train', 'validation'], loc='upper left')
+    plt.xlabel('epoch')
+    plt.ylabel('loss')
+    plt.savefig(f'plots/{experiment_name}_train_loss.png')
 
 def test_model(model, X_test, y_test, criterion, batch_size):
     test_loss = []
@@ -125,27 +162,9 @@ def test_model(model, X_test, y_test, criterion, batch_size):
     
     logger.info(f'Test Loss {avg_test_loss} Accuracy {avg_test_acc}')
     
-    return avg_test_acc, avg_test_loss
+    return avg_test_loss,avg_test_acc
     
-def generate_save_plots(experiment_name, train_loss, test_loss, train_accuracy, test_accuracy):
-    train_accuracy = [acc.cpu().numpy() for acc in train_accuracy]
-    plt.figure()
-    plt.plot(train_accuracy)
-    plt.axhline(y=test_accuracy, color='r', linestyle='-', label='Test Accuracy')
-    plt.title(f'{experiment_name} Training Accuracy')
-    plt.legend(['Train', 'Test'], loc='upper left')
-    plt.xlabel('epoch')
-    plt.ylabel('accuracy')
-    plt.savefig(f'graphs/{experiment_name}_train_acc.png')
 
-    plt.figure()
-    plt.plot(train_loss, label='Train Loss')
-    plt.axhline(y=test_loss, color='r', linestyle='-', label='Test Loss')
-    plt.title(f'{experiment_name} Training Loss')
-    plt.legend(loc='upper right')
-    plt.xlabel('epoch')
-    plt.ylabel('loss')
-    plt.savefig(f'graphs/{experiment_name}_train_loss.png')
 
 def summarize_model(model, input_shape, experiment_name=EXPERIMENT_NAME):
     with open(f'{experiment_name}.log', 'a') as f:
@@ -191,13 +210,13 @@ if __name__ == '__main__':
         
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(current_model.parameters(), lr=LEARNING_RATE)
-    trained_model, train_loss, train_accuracy = train_model(current_model, X_train, y_train, criterion, optimizer, EPOCHS, BATCH_SIZE)
-    test_acc, test_loss = test_model(trained_model, X_test, y_test, criterion, BATCH_SIZE)
-    generate_save_plots(EXPERIMENT_NAME, train_loss=train_loss, train_accuracy=train_accuracy, test_accuracy=test_acc, test_loss=test_loss)
+    trained_model, loss, accuracy, val_acc, val_loss = train_model(current_model, X_train, y_train, X_test, y_test, criterion, optimizer, EPOCHS, BATCH_SIZE)
+    test_model(trained_model, X_test, y_test, criterion, batch_size=BATCH_SIZE)
+    generate_save_plots(EXPERIMENT_NAME, loss, accuracy, val_loss, val_acc)
+    logger.info(f"LOSS OVER EPOCHS: {loss} ACCURACY OVER EPOCHS: {accuracy} VAL ACCURACY OVER EPOCHS: {val_acc} VAL LOSS OVER EPOCHS: {val_loss}")
     if MODEL_NAME == "NN": 
         summarize_model(trained_model, (BATCH_SIZE, X_train.shape[1] * X_train.shape[2]))
     if MODEL_NAME == "CNN": 
         summarize_model(trained_model, (NUM_FRAMES, NUM_LANDMARKS * 2))
-    if MODEL_NAME == "LSTM": 
-        summarize_model(trained_model, (NUM_FRAMES, NUM_LANDMARKS, 2))
+    
 
