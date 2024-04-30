@@ -24,8 +24,8 @@ NUM_LANDMARKS = 21
 
 EPOCHS=25
 BATCH_SIZE=32
-MODEL_NAME = "LSTM"
-EXPERIMENT_NAME='LSTM_Dropout_Reg_LR=0.001'
+MODEL_NAME = "LSTM_BASE"
+EXPERIMENT_NAME='LSTM_BASE_TEST'
 LEARNING_RATE=0.001
 LSTM_HIDDEN_SIZE = 256
 LSTM_NUM_LAYERS = 2
@@ -55,7 +55,7 @@ def load_data():
         except: 
             print('Data not found. Please run the preprocessing script first.')
             raise Exception('Data not found')
-    if MODEL_NAME == "CNN" or MODEL_NAME == "LSTM": 
+    if MODEL_NAME == "CNN" or MODEL_NAME == "LSTM" or MODEL_NAME == "LSTM_BASE": 
         X_train = X_train.reshape(-1, NUM_FRAMES, NUM_LANDMARKS, 2)
     return X_train, y_train
 
@@ -112,7 +112,7 @@ def generate_save_plots(experiment_name, loss, accuracy, val_loss, val_acc):
     plt.legend(['train', 'validation'], loc='upper left')
     plt.xlabel('epoch')
     plt.ylabel('accuracy')
-    plt.savefig(f'plots/{experiment_name}_train_acc.png')
+    plt.savefig(f'graphs/{experiment_name}_train_acc.png')
 
     plt.figure()
     plt.plot(loss)
@@ -121,7 +121,7 @@ def generate_save_plots(experiment_name, loss, accuracy, val_loss, val_acc):
     plt.legend(['train', 'validation'], loc='upper left')
     plt.xlabel('epoch')
     plt.ylabel('loss')
-    plt.savefig(f'plots/{experiment_name}_train_loss.png')
+    plt.savefig(f'graphs/{experiment_name}_train_loss.png')
 
 def test_model(model, X_test, y_test, criterion, batch_size):
     test_loss = []
