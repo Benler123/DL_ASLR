@@ -23,10 +23,10 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
 
-EPOCHS=25
+EPOCHS=1
 BATCH_SIZE=32
-MODEL_NAME = "LSTM"
-EXPERIMENT_NAME='LSTM_Dropout_Reg_LR=0.001'
+MODEL_NAME = "CNN"
+EXPERIMENT_NAME='CNN_test'
 WEIGHT_DECAY = 0.0001
 LEARNING_RATE=0.001
 LSTM_HIDDEN_SIZE = 256
@@ -57,8 +57,11 @@ def load_data():
         except: 
             print('Data not found. Please run the preprocessing script first.')
             raise Exception('Data not found')
-    if MODEL_NAME == "CNN" or MODEL_NAME == "LSTM" or MODEL_NAME == "LSTM_BASE": 
+    if MODEL_NAME == "LSTM": 
         X_train = X_train.reshape(-1, NUM_FRAMES, NUM_LANDMARKS, 2)
+    if MODEL_NAME == "CNN":
+        X_train = X_train.reshape(-1, NUM_LANDMARKS * 2, NUM_FRAMES)
+        X_test = X_test.reshape(-1, NUM_LANDMARKS * 2, NUM_FRAMES)
     return X_train, y_train
 
 def train_model(model, X_train, y_train, X_test, y_test, criterion, optimizer, epochs, batch_size):
