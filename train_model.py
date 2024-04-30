@@ -114,7 +114,7 @@ def generate_save_plots(experiment_name, loss, accuracy, val_loss, val_acc):
     plt.legend(['train', 'validation'], loc='upper left')
     plt.xlabel('epoch')
     plt.ylabel('accuracy')
-    plt.savefig(f'graphs/{experiment_name}_train_acc.png')
+    plt.savefig(f'plots/{experiment_name}_train_acc.png')
 
     plt.figure()
     plt.plot(loss)
@@ -123,7 +123,7 @@ def generate_save_plots(experiment_name, loss, accuracy, val_loss, val_acc):
     plt.legend(['train', 'validation'], loc='upper left')
     plt.xlabel('epoch')
     plt.ylabel('loss')
-    plt.savefig(f'graphs/{experiment_name}_train_loss.png')
+    plt.savefig(f'plots/{experiment_name}_train_loss.png')
 
 def test_model(model, X_test, y_test, criterion, batch_size):
     test_loss = []
