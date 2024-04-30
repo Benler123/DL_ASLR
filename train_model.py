@@ -4,6 +4,7 @@ import torch.nn as nn
 import torch.optim as optim
 import models.base_nn as base_nn
 import models.lstm as lstm
+import models.lstm_base as lstm_base
 import models.cnn_1d_v1 as cnn_1d_v1
 import models.cnn_1d_v2 as cnn_1d_v2
 import matplotlib.pyplot as plt
@@ -211,7 +212,7 @@ if __name__ == '__main__':
     NN_model = base_nn.NN_model(X_train.shape[1] * X_train.shape[2], len(y_train[1])).to(device)
 
     LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=LSTM_HIDDEN_SIZE, num_layers=LSTM_NUM_LAYERS, weight_decay=LSTM_WEIGHT_DECAY, dropout_prob=LSTM_DROPOUT_PROB, output_classes=len(y_train[0])).to(device)
-
+    LSTM_base_model = lstm_base.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=LSTM_HIDDEN_SIZE, num_layers=LSTM_NUM_LAYERS, output_classes=len(y_train[0])).to(device)
     CNN_model = cnn_1d_v2.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0])).to(device)
 
     current_model = None
@@ -221,6 +222,9 @@ if __name__ == '__main__':
         current_model = NN_model
     if MODEL_NAME == "LSTM": 
         current_model = LSTM_model
+    if MODEL_NAME == "LSTM_BASE": 
+        current_model = LSTM_base_model
+        
         
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(current_model.parameters(), lr=LEARNING_RATE)
