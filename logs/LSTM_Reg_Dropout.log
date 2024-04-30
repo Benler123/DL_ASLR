@@ -1,0 +1,18 @@
+2024-04-30 16:50:56,489 - __main__ - INFO - Model Name: LSTM
+2024-04-30 16:50:56,489 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout
+2024-04-30 16:50:56,489 - __main__ - INFO - Epochs: 10
+2024-04-30 16:50:56,490 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:50:56,490 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:50:56,491 - __main__ - INFO - LSTM Hidden Size: 256
+2024-04-30 16:50:56,491 - __main__ - INFO - LSTM Number of Layers: 2
+2024-04-30 16:50:56,492 - __main__ - INFO - LSTM Weight Decay: 0.001
+2024-04-30 16:50:56,492 - __main__ - INFO - LSTM Dropout Probability: 0.5
+2024-04-30 16:52:12,059 - __main__ - INFO - Model Name: LSTM
+2024-04-30 16:52:12,059 - __main__ - INFO - Experiment Name: LSTM_Reg_Dropout
+2024-04-30 16:52:12,059 - __main__ - INFO - Epochs: 10
+2024-04-30 16:52:12,060 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:52:12,061 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:52:12,061 - __main__ - INFO - LSTM Hidden Size: 256
+2024-04-30 16:52:12,062 - __main__ - INFO - LSTM Number of Layers: 2
+2024-04-30 16:52:12,062 - __main__ - INFO - LSTM Weight Decay: 0.001
+2024-04-30 16:52:12,063 - __main__ - INFO - LSTM Dropout Probability: 0.5

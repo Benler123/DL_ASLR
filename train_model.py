@@ -21,10 +21,10 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 NUM_FRAMES = 60
 NUM_LANDMARKS = 21
 
-EPOCHS=2
+EPOCHS=10
 BATCH_SIZE=32
-MODEL_NAME = "NN"
-EXPERIMENT_NAME='Base_Neural_Network'
+MODEL_NAME = "LSTM"
+EXPERIMENT_NAME='LSTM_Reg_Dropout'
 LEARNING_RATE=0.001
 LSTM_HIDDEN_SIZE = 256
 LSTM_NUM_LAYERS = 2
@@ -45,8 +45,8 @@ logger.addHandler(handler)
 
 def load_data():
     try:
-        X_train = np.load('scratch/X_train_combined.npy')
-        y_train = np.load('scratch/y_train_combined.npy')
+        X_train = np.load('../scratch/X_train_combined.npy')
+        y_train = np.load('../scratch/y_train_combined.npy')
     except:
         try:
             X_train = np.load('preprocessing/X_train_combined.npy')
