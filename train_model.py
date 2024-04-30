@@ -7,6 +7,7 @@ import models.lstm as lstm
 import models.lstm_base as lstm_base
 import models.cnn_1d_v1 as cnn_1d_v1
 import models.cnn_1d_v2 as cnn_1d_v2
+import models.cnn_1d_v3 as cnn_1d_v3
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import contextlib
@@ -24,8 +25,9 @@ NUM_LANDMARKS = 21
 
 EPOCHS=25
 BATCH_SIZE=32
-MODEL_NAME = "LSTM_BASE"
-EXPERIMENT_NAME='LSTM_BASE_TEST'
+MODEL_NAME = "LSTM"
+EXPERIMENT_NAME='LSTM_Dropout_Reg_LR=0.001'
+WEIGHT_DECAY = 0.0001
 LEARNING_RATE=0.001
 LSTM_HIDDEN_SIZE = 256
 LSTM_NUM_LAYERS = 2
@@ -178,6 +180,7 @@ def parse_arguments():
     
     model = config['DEFAULT']['MODEL']
     experiment_name = config['DEFAULT']['EXPERIMENT_NAME']
+    weight_decay = float(config['DEFAULT']['WEIGHT_DECAY'])
     epochs = int(config['DEFAULT']['EPOCHS'])
     batch_size = int(config['DEFAULT']['BATCH_SIZE'])
     learning_rate = float(config['DEFAULT']['LEARNING_RATE'])
@@ -185,9 +188,9 @@ def parse_arguments():
     lstm_num_layers = int(config['DEFAULT']['LSTM_NUM_LAYERS'])
     lstm_weight_decay = float(config['DEFAULT']['LSTM_WEIGHT_DECAY'])
     lstm_dropout_prob = float(config['DEFAULT']['LSTM_DROPOUT_PROB'])
-    return model, experiment_name, epochs, batch_size, learning_rate, lstm_hidden_size, lstm_num_layers, lstm_weight_decay, lstm_dropout_prob
+    return model, experiment_name, weight_decay, epochs, batch_size, learning_rate, lstm_hidden_size, lstm_num_layers, lstm_weight_decay, lstm_dropout_prob
 if __name__ == '__main__':
-    MODEL_NAME, EXPERIMENT_NAME, EPOCHS, BATCH_SIZE, LEARNING_RATE, LSTM_HIDDEN_SIZE, LSTM_NUM_LAYERS, LSTM_WEIGHT_DECAY, LSTM_DROPOUT_PROB = parse_arguments()
+    MODEL_NAME, EXPERIMENT_NAME, WEIGHT_DECAY, EPOCHS, BATCH_SIZE, LEARNING_RATE, LSTM_HIDDEN_SIZE, LSTM_NUM_LAYERS, LSTM_WEIGHT_DECAY, LSTM_DROPOUT_PROB = parse_arguments()
     gc.collect()
     torch.cuda.empty_cache()
     logger.info(f'Model Name: {MODEL_NAME}')
@@ -227,7 +230,7 @@ if __name__ == '__main__':
         
         
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(current_model.parameters(), lr=LEARNING_RATE)
+    optimizer = optim.Adam(current_model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY)
     trained_model, loss, accuracy, val_acc, val_loss = train_model(current_model, X_train, y_train, X_test, y_test, criterion, optimizer, EPOCHS, BATCH_SIZE)
     test_model(trained_model, X_test, y_test, criterion, batch_size=BATCH_SIZE)
     generate_save_plots(EXPERIMENT_NAME, loss, accuracy, val_loss, val_acc)
