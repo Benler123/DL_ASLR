@@ -97,7 +97,7 @@ def parse_arguments():
     num_landmarks = int(config['DEFAULT']['NUM_LANDMARKS'])
     hidden_size = int(config['DEFAULT']['HIDDEN_SIZE'])
     latent_dim = int(config['DEFAULT']['LATENT_DIM'])
-    print(model, experiment_name, epochs, batch_size, learning_rate, num_frames, num_landmarks, hidden_size, latent_dim)
+
     return model, experiment_name, epochs, batch_size, learning_rate, num_frames, num_landmarks, hidden_size, latent_dim
 
 if __name__ == '__main__':
@@ -105,8 +105,7 @@ if __name__ == '__main__':
     MODEL_NAME, EXPERIMENT_NAME, EPOCHS, BATCH_SIZE, LEARNING_RATE, NUM_FRAMES, NUM_LANDMARKS, HIDDEN_SIZE, LATENT_DIM = parse_arguments()
     gc.collect()
     torch.cuda.empty_cache()
-    print(type(HIDDEN_SIZE))
-    print(type(LATENT_DIM))
+
     logger = logging.getLogger(__name__)
     logging.basicConfig(level=logging.INFO)
 
