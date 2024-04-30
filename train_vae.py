@@ -13,7 +13,7 @@ from tqdm import tqdm
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-EPOCHS = 25
+EPOCHS = 2
 BATCH_SIZE = 32
 EXPERIMENT_NAME = 'VAE_experiment'
 LEARNING_RATE = 0.001
@@ -25,7 +25,7 @@ LATENT_DIM = 50
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
-handler = logging.FileHandler(f'{EXPERIMENT_NAME}.log')
+handler = logging.FileHandler(f'logs/{EXPERIMENT_NAME}.log')
 handler.setLevel(logging.INFO)
 
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')

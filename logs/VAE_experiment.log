@@ -1,0 +1,5 @@
+2024-04-30 18:25:30,087 - __main__ - INFO - Epoch 1 Average Loss: 1982.785777
+2024-04-30 18:26:38,115 - __main__ - INFO - Epoch 2 Average Loss: 1638.547224
+2024-04-30 18:26:42,074 - __main__ - INFO - Average Test Loss: 1491.586090
+2024-04-30 18:26:42,075 - __main__ - INFO - X_train shape: (75580, 60, 42)
+2024-04-30 18:26:42,075 - __main__ - INFO - X_test shape: (18896, 60, 42)
