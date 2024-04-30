@@ -125,7 +125,6 @@
 2024-04-28 20:25:11,009 - __main__ - INFO - y_test shape: (18896, 250)
 2024-04-28 20:26:08,911 - __main__ - INFO - Epoch 1 Loss 5.132658513494713 Accuracy 0.028554795309901237
 2024-04-28 20:26:12,377 - __main__ - INFO - Test Loss 4.73411603546788 Accuracy 0.06260575296108291
-<<<<<<< HEAD
 2024-04-28 21:07:34,974 - __main__ - INFO - Model Name: LSTM
 2024-04-28 21:07:34,975 - __main__ - INFO - Experiment Name: lstm_double
 2024-04-28 21:07:34,975 - __main__ - INFO - Epochs: 0
@@ -201,87 +200,3 @@
 2024-04-28 23:08:18,733 - __main__ - INFO - Epoch 10 Loss 2.400518041157702 Accuracy 0.5177683234214783
 2024-04-28 23:08:53,083 - __main__ - INFO - Epoch 11 Loss 2.312859290540471 Accuracy 0.541790783405304
 2024-04-28 23:09:28,134 - __main__ - INFO - Epoch 12 Loss 2.2449340432705664 Accuracy 0.5618290305137634
-=======
-2024-04-30 10:14:34,783 - __main__ - INFO - Model Name: LSTM
-2024-04-30 10:14:34,784 - __main__ - INFO - Experiment Name: lstm_double
-2024-04-30 10:14:34,784 - __main__ - INFO - Epochs: 0
-2024-04-30 10:14:34,784 - __main__ - INFO - Batch Size: 32
-2024-04-30 10:14:34,784 - __main__ - INFO - Learning Rate: 0.001
-2024-04-30 10:14:34,784 - __main__ - INFO - LSTM Hidden Size: 256
-2024-04-30 10:14:34,784 - __main__ - INFO - LSTM Number of Layers: 2
-2024-04-30 10:14:34,784 - __main__ - INFO - LSTM Weight Decay: 0.001
-2024-04-30 10:14:34,784 - __main__ - INFO - LSTM Dropout Probability: 0.7
-2024-04-30 10:14:36,665 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
-2024-04-30 10:14:36,666 - __main__ - INFO - y_train shape: (75580, 250)
-2024-04-30 10:14:36,666 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
-2024-04-30 10:14:36,666 - __main__ - INFO - y_test shape: (18896, 250)
-2024-04-30 10:15:06,011 - __main__ - INFO - Model Name: LSTM
-2024-04-30 10:15:06,011 - __main__ - INFO - Experiment Name: lstm_double
-2024-04-30 10:15:06,011 - __main__ - INFO - Epochs: 0
-2024-04-30 10:15:06,011 - __main__ - INFO - Batch Size: 32
-2024-04-30 10:15:06,011 - __main__ - INFO - Learning Rate: 0.001
-2024-04-30 10:15:06,011 - __main__ - INFO - LSTM Hidden Size: 256
-2024-04-30 10:15:06,011 - __main__ - INFO - LSTM Number of Layers: 2
-2024-04-30 10:15:06,011 - __main__ - INFO - LSTM Weight Decay: 0.001
-2024-04-30 10:15:06,011 - __main__ - INFO - LSTM Dropout Probability: 0.7
-2024-04-30 10:15:07,780 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
-2024-04-30 10:15:07,780 - __main__ - INFO - y_train shape: (75580, 250)
-2024-04-30 10:15:07,780 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
-2024-04-30 10:15:07,780 - __main__ - INFO - y_test shape: (18896, 250)
-2024-04-30 10:15:50,772 - __main__ - INFO - Model Name: LSTM
-2024-04-30 10:15:50,773 - __main__ - INFO - Experiment Name: lstm_double
-2024-04-30 10:15:50,773 - __main__ - INFO - Epochs: 0
-2024-04-30 10:15:50,773 - __main__ - INFO - Batch Size: 32
-2024-04-30 10:15:50,773 - __main__ - INFO - Learning Rate: 0.001
-2024-04-30 10:15:50,773 - __main__ - INFO - LSTM Hidden Size: 256
-2024-04-30 10:15:50,773 - __main__ - INFO - LSTM Number of Layers: 2
-2024-04-30 10:15:50,773 - __main__ - INFO - LSTM Weight Decay: 0.001
-2024-04-30 10:15:50,773 - __main__ - INFO - LSTM Dropout Probability: 0.7
-2024-04-30 10:15:52,412 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
-2024-04-30 10:15:52,414 - __main__ - INFO - y_train shape: (75580, 250)
-2024-04-30 10:15:52,414 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
-2024-04-30 10:15:52,414 - __main__ - INFO - y_test shape: (18896, 250)
-2024-04-30 10:16:08,961 - __main__ - INFO - Model Name: LSTM
-2024-04-30 10:16:08,961 - __main__ - INFO - Experiment Name: lstm_double
-2024-04-30 10:16:08,961 - __main__ - INFO - Epochs: 0
-2024-04-30 10:16:08,961 - __main__ - INFO - Batch Size: 32
-2024-04-30 10:16:08,961 - __main__ - INFO - Learning Rate: 0.001
-2024-04-30 10:16:08,961 - __main__ - INFO - LSTM Hidden Size: 256
-2024-04-30 10:16:08,961 - __main__ - INFO - LSTM Number of Layers: 2
-2024-04-30 10:16:08,961 - __main__ - INFO - LSTM Weight Decay: 0.001
-2024-04-30 10:16:08,961 - __main__ - INFO - LSTM Dropout Probability: 0.7
-2024-04-30 10:16:10,662 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
-2024-04-30 10:16:10,664 - __main__ - INFO - y_train shape: (75580, 250)
-2024-04-30 10:16:10,664 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
-2024-04-30 10:16:10,664 - __main__ - INFO - y_test shape: (18896, 250)
-2024-04-30 10:16:53,906 - __main__ - INFO - Test Loss 5.678055094381678 Accuracy 0.0035427241962774957
-2024-04-30 10:16:54,129 - __main__ - INFO - LOSS OVER EPOCHS: [] ACCURACY OVER EPOCHS: []
-2024-04-30 10:17:33,714 - __main__ - INFO - Model Name: LSTM
-2024-04-30 10:17:33,714 - __main__ - INFO - Experiment Name: lstm_double
-2024-04-30 10:17:33,714 - __main__ - INFO - Epochs: 0
-2024-04-30 10:17:33,714 - __main__ - INFO - Batch Size: 32
-2024-04-30 10:17:33,714 - __main__ - INFO - Learning Rate: 0.001
-2024-04-30 10:17:33,714 - __main__ - INFO - LSTM Hidden Size: 256
-2024-04-30 10:17:33,714 - __main__ - INFO - LSTM Number of Layers: 2
-2024-04-30 10:17:33,714 - __main__ - INFO - LSTM Weight Decay: 0.001
-2024-04-30 10:17:33,714 - __main__ - INFO - LSTM Dropout Probability: 0.7
-2024-04-30 10:17:35,508 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
-2024-04-30 10:17:35,508 - __main__ - INFO - y_train shape: (75580, 250)
-2024-04-30 10:17:35,508 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
-2024-04-30 10:17:35,508 - __main__ - INFO - y_test shape: (18896, 250)
-2024-04-30 10:18:21,333 - __main__ - INFO - Test Loss 5.6783688467771265 Accuracy 0.0034369712351945856
-2024-04-30 10:18:21,519 - __main__ - INFO - LOSS OVER EPOCHS: [] ACCURACY OVER EPOCHS: []
-2024-04-30 10:20:26,879 - __main__ - INFO - Model Name: LSTM
-2024-04-30 10:20:26,880 - __main__ - INFO - Experiment Name: lstm_double
-2024-04-30 10:20:26,880 - __main__ - INFO - Epochs: 2
-2024-04-30 10:20:26,880 - __main__ - INFO - Batch Size: 32
-2024-04-30 10:20:26,880 - __main__ - INFO - Learning Rate: 0.001
-2024-04-30 10:20:26,880 - __main__ - INFO - LSTM Hidden Size: 256
-2024-04-30 10:20:26,880 - __main__ - INFO - LSTM Number of Layers: 2
-2024-04-30 10:20:26,880 - __main__ - INFO - LSTM Weight Decay: 0.001
-2024-04-30 10:20:26,880 - __main__ - INFO - LSTM Dropout Probability: 0.7
-2024-04-30 10:20:29,282 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
-2024-04-30 10:20:29,283 - __main__ - INFO - y_train shape: (75580, 250)
-2024-04-30 10:20:29,284 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
-2024-04-30 10:20:29,284 - __main__ - INFO - y_test shape: (18896, 250)
->>>>>>> fcd85e74aa95f87b6c61fb86577ef808c912947d
