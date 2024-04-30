@@ -1,0 +1,40 @@
+---------------------------------------
+Begin Slurm Prolog: Apr-30-2024 18:53:35
+Job ID:    619671
+User ID:   tkwok7
+Account:   coc
+Job name:  DLTRAIN
+Partition: coc-cpu
+---------------------------------------
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda deactivate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+INFO:__main__:Model Name: LSTM
+INFO:__main__:Experiment Name: LSTM_base_LR001_E20_DP5
+INFO:__main__:Epochs: 20
+INFO:__main__:Batch Size: 32
+INFO:__main__:Learning Rate: 0.001
+INFO:__main__:LSTM Hidden Size: 256
+INFO:__main__:LSTM Number of Layers: 2
+INFO:__main__:LSTM Weight Decay: 0.001
+INFO:__main__:LSTM Dropout Probability: 0.5
+INFO:__main__:X_train shape: (75580, 60, 21, 2)
+INFO:__main__:y_train shape: (75580, 250)
+INFO:__main__:X_test shape: (18896, 60, 21, 2)
+INFO:__main__:y_test shape: (18896, 250)
