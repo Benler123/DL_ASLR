@@ -216,11 +216,15 @@ if __name__ == '__main__':
 
     LSTM_model = lstm.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=LSTM_HIDDEN_SIZE, num_layers=LSTM_NUM_LAYERS, weight_decay=LSTM_WEIGHT_DECAY, dropout_prob=LSTM_DROPOUT_PROB, output_classes=len(y_train[0])).to(device)
     LSTM_base_model = lstm_base.LSTM_model(num_landmarks=NUM_LANDMARKS, hidden_size=LSTM_HIDDEN_SIZE, num_layers=LSTM_NUM_LAYERS, output_classes=len(y_train[0])).to(device)
-    CNN_model = cnn_1d_v2.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0])).to(device)
+    
 
     current_model = None
-    if MODEL_NAME == "CNN": 
-        current_model = CNN_model
+    if MODEL_NAME == "CNNv1": 
+        current_model = cnn_1d_v1.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0])).to(device)
+    if MODEL_NAME == "CNNv2":
+        current_model = cnn_1d_v2.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0])).to(device)
+    if MODEL_NAME == "CNNv3":
+        current_model = cnn_1d_v3.CNN1D_model(NUM_LANDMARKS, NUM_FRAMES, len(y_train[0])).to(device)
     if MODEL_NAME == "NN": 
         current_model = NN_model
     if MODEL_NAME == "LSTM": 
