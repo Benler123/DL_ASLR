@@ -1,1 +1,0 @@
-X size:  torch.Size([2, 60, 42])

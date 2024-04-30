@@ -1,0 +1,194 @@
+2024-04-30 16:05:40,417 - __main__ - INFO - Model Name: NN
+2024-04-30 16:05:40,417 - __main__ - INFO - Experiment Name: Base_Neural_Network
+2024-04-30 16:05:40,417 - __main__ - INFO - Epochs: 10
+2024-04-30 16:05:40,417 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:05:40,417 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:05:43,509 - __main__ - INFO - X_train shape: (75580, 1260, 2)
+2024-04-30 16:05:43,510 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 16:05:43,510 - __main__ - INFO - X_test shape: (18896, 1260, 2)
+2024-04-30 16:05:43,510 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 16:09:19,674 - __main__ - INFO - Model Name: NN
+2024-04-30 16:09:19,675 - __main__ - INFO - Experiment Name: Base_Neural_Network
+2024-04-30 16:09:19,675 - __main__ - INFO - Epochs: 10
+2024-04-30 16:09:19,675 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:09:19,675 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:09:21,814 - __main__ - INFO - X_train shape: (75580, 1260, 2)
+2024-04-30 16:09:21,814 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 16:09:21,814 - __main__ - INFO - X_test shape: (18896, 1260, 2)
+2024-04-30 16:09:21,814 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 16:09:39,385 - __main__ - INFO - Test Loss 5.080653190612793 Accuracy 0.03125
+2024-04-30 16:10:03,955 - __main__ - INFO - Model Name: NN
+2024-04-30 16:10:03,955 - __main__ - INFO - Experiment Name: Base_Neural_Network
+2024-04-30 16:10:03,955 - __main__ - INFO - Epochs: 10
+2024-04-30 16:10:03,955 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:10:03,955 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:10:05,750 - __main__ - INFO - X_train shape: (75580, 1260, 2)
+2024-04-30 16:10:05,751 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 16:10:05,751 - __main__ - INFO - X_test shape: (18896, 1260, 2)
+2024-04-30 16:10:05,751 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 16:10:24,294 - __main__ - INFO - Test Loss 4.736602306365967 Accuracy 0.03125
+2024-04-30 16:10:24,296 - __main__ - INFO - Epoch 1 Loss 5.051247199645595 Accuracy 0.033831801265478134
+2024-04-30 16:10:42,405 - __main__ - INFO - Test Loss 4.87232780456543 Accuracy 0.03125
+2024-04-30 16:10:42,408 - __main__ - INFO - Epoch 2 Loss 4.681287428567614 Accuracy 0.06734418869018555
+2024-04-30 16:10:59,478 - __main__ - INFO - Test Loss 4.8725152015686035 Accuracy 0.0
+2024-04-30 16:10:59,480 - __main__ - INFO - Epoch 3 Loss 4.553300455199976 Accuracy 0.0844169557094574
+2024-04-30 16:11:17,618 - __main__ - INFO - Test Loss 4.191184997558594 Accuracy 0.09375
+2024-04-30 16:11:17,622 - __main__ - INFO - Epoch 4 Loss 4.473937059337057 Accuracy 0.09446065872907639
+2024-04-30 16:11:36,687 - __main__ - INFO - Test Loss 3.9333596229553223 Accuracy 0.125
+2024-04-30 16:11:36,690 - __main__ - INFO - Epoch 5 Loss 4.4373100758810144 Accuracy 0.10164471715688705
+2024-04-30 16:11:55,311 - __main__ - INFO - Test Loss 4.127105712890625 Accuracy 0.0625
+2024-04-30 16:11:55,314 - __main__ - INFO - Epoch 6 Loss 4.410606938333051 Accuracy 0.10511861741542816
+2024-04-30 16:12:13,976 - __main__ - INFO - Test Loss 3.727260112762451 Accuracy 0.1875
+2024-04-30 16:12:13,980 - __main__ - INFO - Epoch 7 Loss 4.3968651810507975 Accuracy 0.10922379791736603
+2024-04-30 16:12:31,166 - __main__ - INFO - Test Loss 4.515052318572998 Accuracy 0.21875
+2024-04-30 16:12:31,169 - __main__ - INFO - Epoch 8 Loss 4.389397898132169 Accuracy 0.1102028414607048
+2024-04-30 16:12:48,033 - __main__ - INFO - Test Loss 4.2243218421936035 Accuracy 0.125
+2024-04-30 16:12:48,036 - __main__ - INFO - Epoch 9 Loss 4.378096177858583 Accuracy 0.1124633327126503
+2024-04-30 16:13:06,378 - __main__ - INFO - Test Loss 4.625642776489258 Accuracy 0.09375
+2024-04-30 16:13:06,380 - __main__ - INFO - Epoch 10 Loss 4.388131956545404 Accuracy 0.1116846352815628
+2024-04-30 16:13:07,262 - __main__ - INFO - Test Loss 4.542564966150145 Accuracy 0.10136421319796954
+2024-04-30 16:15:56,553 - __main__ - INFO - Model Name: NN
+2024-04-30 16:15:56,554 - __main__ - INFO - Experiment Name: Base_Neural_Network
+2024-04-30 16:15:56,554 - __main__ - INFO - Epochs: 10
+2024-04-30 16:15:56,554 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:15:56,554 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:15:59,125 - __main__ - INFO - X_train shape: (75580, 1260, 2)
+2024-04-30 16:15:59,131 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 16:15:59,131 - __main__ - INFO - X_test shape: (18896, 1260, 2)
+2024-04-30 16:15:59,131 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 16:16:18,968 - __main__ - INFO - Test Loss 4.851853370666504 Accuracy 0.0625
+2024-04-30 16:16:18,970 - __main__ - INFO - Epoch 1 Loss 5.052345475133045 Accuracy 0.03224416449666023
+2024-04-30 16:16:38,104 - __main__ - INFO - Test Loss 4.405618667602539 Accuracy 0.15625
+2024-04-30 16:16:38,107 - __main__ - INFO - Epoch 2 Loss 4.720107171416384 Accuracy 0.06136408448219299
+2024-04-30 16:16:56,236 - __main__ - INFO - Test Loss 4.702788352966309 Accuracy 0.0625
+2024-04-30 16:16:56,239 - __main__ - INFO - Epoch 3 Loss 4.614249597960463 Accuracy 0.07316930592060089
+2024-04-30 16:17:15,890 - __main__ - INFO - Test Loss 4.620489597320557 Accuracy 0.0
+2024-04-30 16:17:15,894 - __main__ - INFO - Epoch 4 Loss 4.54957042751829 Accuracy 0.08321110904216766
+2024-04-30 16:17:34,759 - __main__ - INFO - Test Loss 5.140700340270996 Accuracy 0.03125
+2024-04-30 16:17:34,763 - __main__ - INFO - Epoch 5 Loss 4.521699493260428 Accuracy 0.08827643096446991
+2024-04-30 16:17:54,069 - __main__ - INFO - Test Loss 4.395777225494385 Accuracy 0.125
+2024-04-30 16:17:54,073 - __main__ - INFO - Epoch 6 Loss 4.497385921365219 Accuracy 0.0944719985127449
+2024-04-30 16:18:13,706 - __main__ - INFO - Test Loss 4.61537504196167 Accuracy 0.15625
+2024-04-30 16:18:13,709 - __main__ - INFO - Epoch 7 Loss 4.478036022307406 Accuracy 0.09643007814884186
+2024-04-30 16:18:34,431 - __main__ - INFO - Test Loss 4.64625883102417 Accuracy 0.03125
+2024-04-30 16:18:34,435 - __main__ - INFO - Epoch 8 Loss 4.471388191413718 Accuracy 0.09754332154989243
+2024-04-30 16:18:52,846 - __main__ - INFO - Test Loss 5.152338027954102 Accuracy 0.125
+2024-04-30 16:18:52,850 - __main__ - INFO - Epoch 9 Loss 4.4572561215183475 Accuracy 0.09990587830543518
+2024-04-30 16:19:11,140 - __main__ - INFO - Test Loss 5.726020336151123 Accuracy 0.0625
+2024-04-30 16:19:11,143 - __main__ - INFO - Epoch 10 Loss 4.459861211510254 Accuracy 0.10047855973243713
+2024-04-30 16:19:12,209 - __main__ - INFO - Test Loss 4.5830877291167855 Accuracy 0.09285109983079526
+2024-04-30 16:19:28,239 - __main__ - INFO - Model Name: NN
+2024-04-30 16:19:28,239 - __main__ - INFO - Experiment Name: Base_Neural_Network
+2024-04-30 16:19:28,239 - __main__ - INFO - Epochs: 10
+2024-04-30 16:19:28,239 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:19:28,239 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:19:30,607 - __main__ - INFO - X_train shape: (75580, 1260, 2)
+2024-04-30 16:19:30,609 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 16:19:30,609 - __main__ - INFO - X_test shape: (18896, 1260, 2)
+2024-04-30 16:19:30,609 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 16:19:49,680 - __main__ - INFO - Test Loss 4.661484241485596 Accuracy 0.03125
+2024-04-30 16:19:49,682 - __main__ - INFO - Epoch 1 Loss 5.016414463065823 Accuracy 0.036700889468193054
+2024-04-30 16:20:08,845 - __main__ - INFO - Test Loss 4.513087749481201 Accuracy 0.09375
+2024-04-30 16:20:08,848 - __main__ - INFO - Epoch 2 Loss 4.676347794823481 Accuracy 0.06593043357133865
+2024-04-30 16:20:13,797 - __main__ - INFO - Model Name: NN
+2024-04-30 16:20:13,798 - __main__ - INFO - Experiment Name: Base_Neural_Network
+2024-04-30 16:20:13,798 - __main__ - INFO - Epochs: 1
+2024-04-30 16:20:13,798 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:20:13,798 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:20:15,913 - __main__ - INFO - X_train shape: (75580, 1260, 2)
+2024-04-30 16:20:15,914 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 16:20:15,914 - __main__ - INFO - X_test shape: (18896, 1260, 2)
+2024-04-30 16:20:15,914 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 16:20:34,928 - __main__ - INFO - Test Loss 5.112217903137207 Accuracy 0.0
+2024-04-30 16:20:34,931 - __main__ - INFO - Epoch 1 Loss 5.039204178171376 Accuracy 0.03296048939228058
+2024-04-30 16:20:35,790 - __main__ - INFO - Test Loss 4.825057266932453 Accuracy 0.04727157360406092
+2024-04-30 16:20:36,103 - __main__ - INFO - LOSS OVER EPOCHS: [5.039204178171376] ACCURACY OVER EPOCHS: [tensor(0.0330)]
+2024-04-30 16:22:44,374 - __main__ - INFO - Model Name: NN
+2024-04-30 16:22:44,374 - __main__ - INFO - Experiment Name: Base_Neural_Network
+2024-04-30 16:22:44,374 - __main__ - INFO - Epochs: 2
+2024-04-30 16:22:44,374 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:22:44,374 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:22:46,740 - __main__ - INFO - X_train shape: (75580, 1260, 2)
+2024-04-30 16:22:46,741 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 16:22:46,741 - __main__ - INFO - X_test shape: (18896, 1260, 2)
+2024-04-30 16:22:46,741 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 16:23:05,639 - __main__ - INFO - Test Loss 5.133877754211426 Accuracy 0.0
+2024-04-30 16:23:05,642 - __main__ - INFO - Epoch 1 Loss 5.0457161145125475 Accuracy 0.03331770747900009
+2024-04-30 16:23:23,670 - __main__ - INFO - Test Loss 4.908694744110107 Accuracy 0.0625
+2024-04-30 16:23:23,674 - __main__ - INFO - Epoch 2 Loss 4.701728364858054 Accuracy 0.06343556940555573
+2024-04-30 16:23:24,547 - __main__ - INFO - Test Loss 4.660749330940182 Accuracy 0.06995558375634518
+2024-04-30 16:23:24,781 - __main__ - INFO - LOSS OVER EPOCHS: [5.0457161145125475, 4.701728364858054] ACCURACY OVER EPOCHS: [tensor(0.0333), tensor(0.0634)]
+2024-04-30 16:24:02,884 - __main__ - INFO - Model Name: NN
+2024-04-30 16:24:02,884 - __main__ - INFO - Experiment Name: Base_Neural_Network
+2024-04-30 16:24:02,884 - __main__ - INFO - Epochs: 2
+2024-04-30 16:24:02,884 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:24:02,884 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:24:05,195 - __main__ - INFO - X_train shape: (75580, 1260, 2)
+2024-04-30 16:24:05,195 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 16:24:05,195 - __main__ - INFO - X_test shape: (18896, 1260, 2)
+2024-04-30 16:24:05,195 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 16:24:24,631 - __main__ - INFO - Test Loss 4.903695583343506 Accuracy 0.09375
+2024-04-30 16:24:24,631 - __main__ - INFO - Epoch 1 Loss 4.994617462158203 Accuracy 4.994617462158203
+2024-04-30 16:24:42,988 - __main__ - INFO - Test Loss 4.866686820983887 Accuracy 0.0625
+2024-04-30 16:24:42,988 - __main__ - INFO - Epoch 2 Loss 4.5328545570373535 Accuracy 4.5328545570373535
+2024-04-30 16:24:43,880 - __main__ - INFO - Test Loss 4.662512561794868 Accuracy 0.06667724196277496
+2024-04-30 16:24:54,221 - __main__ - INFO - Model Name: NN
+2024-04-30 16:24:54,221 - __main__ - INFO - Experiment Name: Base_Neural_Network
+2024-04-30 16:24:54,221 - __main__ - INFO - Epochs: 2
+2024-04-30 16:24:54,221 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:24:54,221 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:24:56,703 - __main__ - INFO - X_train shape: (75580, 1260, 2)
+2024-04-30 16:24:56,711 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 16:24:56,711 - __main__ - INFO - X_test shape: (18896, 1260, 2)
+2024-04-30 16:24:56,711 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 16:25:16,464 - __main__ - INFO - Test Loss 4.950682163238525 Accuracy 0.0
+2024-04-30 16:25:16,465 - __main__ - INFO - Epoch 1 Loss 4.55373477935791 Accuracy 4.55373477935791
+2024-04-30 16:25:33,949 - __main__ - INFO - Test Loss 5.184683322906494 Accuracy 0.09375
+2024-04-30 16:25:33,949 - __main__ - INFO - Epoch 2 Loss 4.699406147003174 Accuracy 4.699406147003174
+2024-04-30 16:25:34,771 - __main__ - INFO - Test Loss 4.671214447812178 Accuracy 0.06715313028764805
+2024-04-30 16:25:34,975 - __main__ - INFO - LOSS OVER EPOCHS: [4.55373477935791, 4.699406147003174] ACCURACY OVER EPOCHS: [4.55373477935791, 4.699406147003174]
+2024-04-30 16:26:13,746 - __main__ - INFO - Model Name: NN
+2024-04-30 16:26:13,746 - __main__ - INFO - Experiment Name: Base_Neural_Network
+2024-04-30 16:26:13,746 - __main__ - INFO - Epochs: 2
+2024-04-30 16:26:13,746 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:26:13,746 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:26:15,785 - __main__ - INFO - X_train shape: (75580, 1260, 2)
+2024-04-30 16:26:15,785 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 16:26:15,785 - __main__ - INFO - X_test shape: (18896, 1260, 2)
+2024-04-30 16:26:15,785 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 16:26:34,948 - __main__ - INFO - Test Loss 4.868264198303223 Accuracy 0.0625
+2024-04-30 16:26:34,948 - __main__ - INFO - Epoch 1 Loss 4.301724910736084 Accuracy 0.1428571492433548
+2024-04-30 16:26:53,911 - __main__ - INFO - Test Loss 4.780429840087891 Accuracy 0.0
+2024-04-30 16:26:53,913 - __main__ - INFO - Epoch 2 Loss 4.680628299713135 Accuracy 0.1071428582072258
+2024-04-30 16:26:54,708 - __main__ - INFO - Test Loss 4.690623270476934 Accuracy 0.06678299492385786
+2024-04-30 16:26:54,910 - __main__ - INFO - LOSS OVER EPOCHS: [4.301724910736084, 4.680628299713135] ACCURACY OVER EPOCHS: [tensor(0.1429), tensor(0.1071)]
+2024-04-30 16:28:17,266 - __main__ - INFO - Model Name: NN
+2024-04-30 16:28:17,266 - __main__ - INFO - Experiment Name: Base_Neural_Network
+2024-04-30 16:28:17,266 - __main__ - INFO - Epochs: 2
+2024-04-30 16:28:17,266 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:28:17,266 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:28:19,453 - __main__ - INFO - X_train shape: (75580, 1260, 2)
+2024-04-30 16:28:19,453 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 16:28:19,453 - __main__ - INFO - X_test shape: (18896, 1260, 2)
+2024-04-30 16:28:19,453 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 16:28:38,068 - __main__ - INFO - Test Loss 5.4664106369018555 Accuracy 0.0
+2024-04-30 16:28:38,068 - __main__ - INFO - Epoch 1 Loss 4.853203296661377 Accuracy 0.0357142873108387
+2024-04-30 16:28:55,298 - __main__ - INFO - Test Loss 4.610759735107422 Accuracy 0.09375
+2024-04-30 16:28:55,298 - __main__ - INFO - Epoch 2 Loss 4.537956714630127 Accuracy 0.1428571492433548
+2024-04-30 16:28:56,078 - __main__ - INFO - Test Loss 4.671170926941228 Accuracy 0.06635998307952623
+2024-04-30 16:28:56,255 - __main__ - INFO - LOSS OVER EPOCHS: [4.853203296661377, 4.537956714630127] ACCURACY OVER EPOCHS: [tensor(0.0357), tensor(0.1429)] VAL ACCURACY OVER EPOCHS: [5.4664106369018555, 4.610759735107422] VAL LOSS OVER EPOCHS: [0.0, 0.09375]
+2024-04-30 16:30:07,821 - __main__ - INFO - Model Name: NN
+2024-04-30 16:30:07,822 - __main__ - INFO - Experiment Name: Base_Neural_Network
+2024-04-30 16:30:07,822 - __main__ - INFO - Epochs: 2
+2024-04-30 16:30:07,822 - __main__ - INFO - Batch Size: 32
+2024-04-30 16:30:07,822 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 16:30:09,565 - __main__ - INFO - X_train shape: (75580, 1260, 2)
+2024-04-30 16:30:09,565 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 16:30:09,565 - __main__ - INFO - X_test shape: (18896, 1260, 2)
+2024-04-30 16:30:09,565 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 16:30:28,022 - __main__ - INFO - Test Loss 4.655771255493164 Accuracy 0.03125
+2024-04-30 16:30:28,022 - __main__ - INFO - Epoch 1 Loss 4.80375337600708 Accuracy 0.0
+2024-04-30 16:30:45,499 - __main__ - INFO - Test Loss 4.718955993652344 Accuracy 0.03125
+2024-04-30 16:30:45,499 - __main__ - INFO - Epoch 2 Loss 4.585296630859375 Accuracy 0.0714285746216774
+2024-04-30 16:30:46,263 - __main__ - INFO - Test Loss 4.734721973261051 Accuracy 0.06033206429780034
+2024-04-30 16:30:46,447 - __main__ - INFO - LOSS OVER EPOCHS: [4.80375337600708, 4.585296630859375] ACCURACY OVER EPOCHS: [tensor(0.), tensor(0.0714)] VAL ACCURACY OVER EPOCHS: [0.03125, 0.03125] VAL LOSS OVER EPOCHS: [4.655771255493164, 4.718955993652344]
