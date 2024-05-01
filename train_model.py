@@ -73,9 +73,9 @@ def load_data():
             raise Exception('Data not found')
     if MODEL_NAME == "LSTM": 
         X_train = X_train.reshape(-1, NUM_FRAMES, NUM_LANDMARKS, 2)
-    if MODEL_NAME == "CNN":
-        X_train = X_train.reshape(-1, NUM_LANDMARKS * 2, NUM_FRAMES)
-        X_test = X_test.reshape(-1, NUM_LANDMARKS * 2, NUM_FRAMES)
+    if MODEL_NAME.startswith("CNN"):
+        X_train = X_train.reshape(-1, NUM_FRAMES, NUM_LANDMARKS*2)
+        X_train = X_train.transpose(0, 2, 1)
     return X_train, y_train
 
 def train_model(model, X_train, y_train, X_test, y_test, criterion, optimizer, epochs, batch_size):
