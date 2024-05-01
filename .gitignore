@@ -161,3 +161,5 @@ cython_debug/
 kaggle/
 **.npy
 .DS_Store
+**.png
+**.log
