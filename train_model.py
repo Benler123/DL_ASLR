@@ -108,7 +108,7 @@ def train_model(model, X_train, y_train, X_test, y_test, criterion, optimizer, e
             optimizer.step()
             epoch_loss.append(loss.item())
             epoch_train_acc.append(train_acc)
-        val_indices = np.random.choice(len(X_test), batch_size * 5, replace=False)
+        val_indices = np.random.choice(len(X_test), batch_size * 10, replace=False)
         X_val = X_test[val_indices]
         y_val = y_test[val_indices]
         X_val = torch.tensor(X_val, dtype=torch.float32).to(device)
