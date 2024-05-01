@@ -1,0 +1,17 @@
+2024-04-30 21:34:44,112 - __main__ - INFO - Model Name: LSTM_BASE
+2024-04-30 21:34:44,112 - __main__ - INFO - Experiment Name: LSTM_BASE_LR_0.001
+2024-04-30 21:34:44,112 - __main__ - INFO - Epochs: 10
+2024-04-30 21:34:44,112 - __main__ - INFO - Batch Size: 32
+2024-04-30 21:34:44,112 - __main__ - INFO - Learning Rate: 0.001
+2024-04-30 21:34:47,942 - __main__ - INFO - X_train shape: (75580, 60, 21, 2)
+2024-04-30 21:34:47,942 - __main__ - INFO - y_train shape: (75580, 250)
+2024-04-30 21:34:47,942 - __main__ - INFO - X_test shape: (18896, 60, 21, 2)
+2024-04-30 21:34:47,942 - __main__ - INFO - y_test shape: (18896, 250)
+2024-04-30 21:36:04,348 - __main__ - INFO - Test Loss 4.275851702690124 Accuracy 0.1375
+2024-04-30 21:36:04,713 - __main__ - INFO - Epoch 1 Loss 4.750324635461263 Accuracy 0.07991676032543182
+2024-04-30 21:36:59,371 - __main__ - INFO - Test Loss 4.1337148427963255 Accuracy 0.209375
+2024-04-30 21:36:59,392 - __main__ - INFO - Epoch 2 Loss 4.131702486990267 Accuracy 0.15973524749279022
+2024-04-30 21:37:54,131 - __main__ - INFO - Test Loss 3.7640952587127687 Accuracy 0.25625
+2024-04-30 21:37:54,152 - __main__ - INFO - Epoch 3 Loss 3.8723663332904423 Accuracy 0.19676877558231354
+2024-04-30 21:38:48,895 - __main__ - INFO - Test Loss 3.778244948387146 Accuracy 0.21875
+2024-04-30 21:38:48,916 - __main__ - INFO - Epoch 4 Loss 3.6780276844604454 Accuracy 0.2244371473789215
