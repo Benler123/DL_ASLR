@@ -1,0 +1,70 @@
+---------------------------------------
+Begin Slurm Prolog: Apr-30-2024 18:26:51
+Job ID:    619647
+User ID:   tkwok7
+Account:   coc
+Job name:  DLTRAIN
+Partition: coc-cpu
+---------------------------------------
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda deactivate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+INFO:__main__:Model Name: NN
+INFO:__main__:Experiment Name: NN_Base
+INFO:__main__:Epochs: 10
+INFO:__main__:Batch Size: 32
+INFO:__main__:Learning Rate: 0.0001
+INFO:__main__:X_train shape: (75580, 1260, 2)
+INFO:__main__:y_train shape: (75580, 250)
+INFO:__main__:X_test shape: (18896, 1260, 2)
+INFO:__main__:y_test shape: (18896, 250)
+INFO:__main__:Test Loss 5.326557159423828 Accuracy 0.0625
+INFO:__main__:Epoch 1 Loss 4.290724754333496 Accuracy 0.1785714328289032
+INFO:__main__:Test Loss 3.880152702331543 Accuracy 0.21875
+INFO:__main__:Epoch 2 Loss 3.9492664337158203 Accuracy 0.2142857164144516
+INFO:__main__:Test Loss 3.4922878742218018 Accuracy 0.09375
+INFO:__main__:Epoch 3 Loss 3.5783512592315674 Accuracy 0.2142857164144516
+INFO:__main__:Test Loss 3.6935172080993652 Accuracy 0.21875
+INFO:__main__:Epoch 4 Loss 3.411153554916382 Accuracy 0.1428571492433548
+INFO:__main__:Test Loss 3.5524332523345947 Accuracy 0.25
+INFO:__main__:Epoch 5 Loss 3.254462718963623 Accuracy 0.2142857164144516
+INFO:__main__:Test Loss 3.5549206733703613 Accuracy 0.21875
+INFO:__main__:Epoch 6 Loss 3.1514687538146973 Accuracy 0.3214285671710968
+INFO:__main__:Test Loss 3.6616744995117188 Accuracy 0.25
+INFO:__main__:Epoch 7 Loss 3.0263001918792725 Accuracy 0.2142857164144516
+INFO:__main__:Test Loss 2.9836015701293945 Accuracy 0.21875
+INFO:__main__:Epoch 8 Loss 2.955717086791992 Accuracy 0.2857142984867096
+INFO:__main__:Test Loss 3.547424793243408 Accuracy 0.21875
+INFO:__main__:Epoch 9 Loss 2.993633270263672 Accuracy 0.1785714328289032
+INFO:__main__:Test Loss 3.135746717453003 Accuracy 0.3125
+INFO:__main__:Epoch 10 Loss 2.4880154132843018 Accuracy 0.3928571343421936
+INFO:__main__:Test Loss 3.321618624346712 Accuracy 0.2816201353637902
+INFO:__main__:LOSS OVER EPOCHS: [4.290724754333496, 3.9492664337158203, 3.5783512592315674, 3.411153554916382, 3.254462718963623, 3.1514687538146973, 3.0263001918792725, 2.955717086791992, 2.993633270263672, 2.4880154132843018] ACCURACY OVER EPOCHS: [tensor(0.1786), tensor(0.2143), tensor(0.2143), tensor(0.1429), tensor(0.2143), tensor(0.3214), tensor(0.2143), tensor(0.2857), tensor(0.1786), tensor(0.3929)] VAL ACCURACY OVER EPOCHS: [0.0625, 0.21875, 0.09375, 0.21875, 0.25, 0.21875, 0.25, 0.21875, 0.21875, 0.3125] VAL LOSS OVER EPOCHS: [5.326557159423828, 3.880152702331543, 3.4922878742218018, 3.6935172080993652, 3.5524332523345947, 3.5549206733703613, 3.6616744995117188, 2.9836015701293945, 3.547424793243408, 3.135746717453003]
+---------------------------------------
+Begin Slurm Epilog: Apr-30-2024 18:37:54
+Job ID:        619647
+Array Job ID:  _4294967294
+User ID:       tkwok7
+Account:       coc
+Job name:      DLTRAIN
+Resources:     cpu=1,mem=16G,node=1
+Rsrc Used:     cput=00:11:02,vmem=7528K,walltime=00:11:02,mem=5520K,energy_used=0
+Partition:     coc-cpu
+Nodes:         atl1-1-01-005-4-1
+---------------------------------------

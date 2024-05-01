@@ -12,15 +12,13 @@ class CNN1D_model(nn.Module):
         self.relu = nn.ReLU()
         self.pool = nn.MaxPool1d(kernel_size=2, stride=2)
         
-        final_dim = num_frames // 8  
-        self.fc1 = nn.Linear(256 * final_dim, 1024)  
+        final_dim = num_frames // 2 // 2 // 2  
+        self.fc1 = nn.Linear(256 * final_dim, 1024)
         self.fc2 = nn.Linear(1024, output_classes)
         
         self.dropout = nn.Dropout(0.5)
 
     def forward(self, x):
-        x = x.reshape(x.size(0), x.size(1), -1)
-        x = x.permute(0, 2, 1)
         
         x = self.conv1(x)
         x = self.relu(x)
@@ -43,3 +41,4 @@ class CNN1D_model(nn.Module):
         x = self.fc2(x)
         
         return x
+

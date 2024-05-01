@@ -9,29 +9,32 @@ import logging
 from models.vae import VAE, loss_function  
 from torchsummary import summary
 from tqdm import tqdm
+import configparser
+import argparse
+import gc
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-EPOCHS = 2
-BATCH_SIZE = 32
-EXPERIMENT_NAME = 'VAE_experiment'
-LEARNING_RATE = 0.001
-NUM_FRAMES = 60
-NUM_LANDMARKS = 21
-HIDDEN_SIZE = 256
-LATENT_DIM = 50
+# EPOCHS = 2
+# BATCH_SIZE = 32
+# EXPERIMENT_NAME = 'VAE_experiment'
+# LEARNING_RATE = 0.001
+# NUM_FRAMES = 60
+# NUM_LANDMARKS = 21
+# HIDDEN_SIZE = 256
+# LATENT_DIM = 50
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
+# logger = logging.getLogger(__name__)
+# logging.basicConfig(level=logging.INFO)
 
-handler = logging.FileHandler(f'logs/{EXPERIMENT_NAME}.log')
-handler.setLevel(logging.INFO)
+# handler = logging.FileHandler(f'logs/{EXPERIMENT_NAME}.log')
+# handler.setLevel(logging.INFO)
 
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
+# formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# handler.setFormatter(formatter)
 
-logger.addHandler(handler)
+# logger.addHandler(handler)
 
 def load_data():
 
@@ -75,9 +78,45 @@ def evaluate_model(model, X_test, batch_size):
         print(f'Average Test Loss: {average_loss:.6f}')
         logger.info(f'Average Test Loss: {average_loss:.6f}')
 
+def pass_in_config():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config', type=str, default='config.vae', help='Path to config file')
+    args = parser.parse_args()
+    return args.config
 
+def parse_arguments():
+    config = configparser.ConfigParser()
+    config.read('config.vae')
+    
+    model = config['DEFAULT']['MODEL']
+    experiment_name = config['DEFAULT']['EXPERIMENT_NAME']
+    epochs = int(config['DEFAULT']['EPOCHS'])
+    batch_size = int(config['DEFAULT']['BATCH_SIZE'])
+    learning_rate = float(config['DEFAULT']['LEARNING_RATE'])
+    num_frames = int(config['DEFAULT']['NUM_FRAMES'])
+    num_landmarks = int(config['DEFAULT']['NUM_LANDMARKS'])
+    hidden_size = int(config['DEFAULT']['HIDDEN_SIZE'])
+    latent_dim = int(config['DEFAULT']['LATENT_DIM'])
+
+    return model, experiment_name, epochs, batch_size, learning_rate, num_frames, num_landmarks, hidden_size, latent_dim
 
 if __name__ == '__main__':
+
+    MODEL_NAME, EXPERIMENT_NAME, EPOCHS, BATCH_SIZE, LEARNING_RATE, NUM_FRAMES, NUM_LANDMARKS, HIDDEN_SIZE, LATENT_DIM = parse_arguments()
+    gc.collect()
+    torch.cuda.empty_cache()
+
+    logger = logging.getLogger(__name__)
+    logging.basicConfig(level=logging.INFO)
+
+    handler = logging.FileHandler(f'logs/{EXPERIMENT_NAME}.log')
+    handler.setLevel(logging.INFO)
+
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+
+    logger.addHandler(handler)
+
     X_train = load_data()
     X_train, X_test = train_test_split(X_train, test_size=0.2, random_state=42)
 
@@ -86,7 +125,6 @@ if __name__ == '__main__':
     train_model(vae_model, X_train, optimizer, EPOCHS, BATCH_SIZE)
 
     evaluate_model(vae_model, X_test, BATCH_SIZE)
-
 
     logger.info(f'X_train shape: {X_train.shape}')
     logger.info(f'X_test shape: {X_test.shape}')
