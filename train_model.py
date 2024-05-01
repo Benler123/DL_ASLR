@@ -71,7 +71,7 @@ def load_data():
         except: 
             print('Data not found. Please run the preprocessing script first.')
             raise Exception('Data not found')
-    if MODEL_NAME == "LSTM": 
+    if MODEL_NAME == "LSTM" or MODEL_NAME == "LSTM_BASE": 
         X_train = X_train.reshape(-1, NUM_FRAMES, NUM_LANDMARKS, 2)
     if MODEL_NAME.startswith("CNN"):
         X_train = X_train.reshape(-1, NUM_FRAMES, NUM_LANDMARKS*2)
