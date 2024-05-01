@@ -29,7 +29,7 @@ def pass_in_config():
 
 def parse_arguments():
     config = configparser.ConfigParser()
-    config.read('config.ini')
+    config.read(pass_in_config())
     
     model = config['DEFAULT']['MODEL']
     experiment_name = config['DEFAULT']['EXPERIMENT_NAME']
