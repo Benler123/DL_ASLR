@@ -8,3 +8,26 @@
 2024-04-30 18:49:03,372 - __main__ - INFO - Average Test Loss: 1474.305263
 2024-04-30 18:49:03,372 - __main__ - INFO - X_train shape: (75580, 60, 42)
 2024-04-30 18:49:03,372 - __main__ - INFO - X_test shape: (18896, 60, 42)
+2024-04-30 21:25:48,525 - __main__ - INFO - Epoch 1 Average Loss: 1974.805192
+2024-04-30 21:26:43,527 - __main__ - INFO - Epoch 2 Average Loss: 1571.912741
+2024-04-30 21:27:38,142 - __main__ - INFO - Epoch 3 Average Loss: 1443.050859
+2024-04-30 21:28:32,666 - __main__ - INFO - Epoch 4 Average Loss: 1396.239050
+2024-04-30 21:29:27,259 - __main__ - INFO - Epoch 5 Average Loss: 1367.860154
+2024-04-30 21:30:21,704 - __main__ - INFO - Epoch 6 Average Loss: 1347.629312
+2024-04-30 21:31:15,967 - __main__ - INFO - Epoch 7 Average Loss: 1338.956226
+2024-04-30 21:32:10,245 - __main__ - INFO - Epoch 8 Average Loss: 1327.485331
+2024-04-30 21:33:04,413 - __main__ - INFO - Epoch 9 Average Loss: 1312.559636
+2024-04-30 21:33:58,662 - __main__ - INFO - Epoch 10 Average Loss: 1304.512734
+2024-04-30 21:34:54,143 - __main__ - INFO - Epoch 11 Average Loss: 1297.201934
+2024-04-30 21:35:48,383 - __main__ - INFO - Epoch 12 Average Loss: 1298.033734
+2024-04-30 21:36:42,628 - __main__ - INFO - Epoch 13 Average Loss: 1289.991371
+2024-04-30 21:37:36,981 - __main__ - INFO - Epoch 14 Average Loss: 1287.843484
+2024-04-30 21:38:31,142 - __main__ - INFO - Epoch 15 Average Loss: 1275.379162
+2024-04-30 21:39:25,465 - __main__ - INFO - Epoch 16 Average Loss: 1270.646295
+2024-04-30 21:40:19,670 - __main__ - INFO - Epoch 17 Average Loss: 1273.850609
+2024-04-30 21:41:13,847 - __main__ - INFO - Epoch 18 Average Loss: 1265.154985
+2024-04-30 21:42:08,145 - __main__ - INFO - Epoch 19 Average Loss: 1257.735761
+2024-04-30 21:43:02,441 - __main__ - INFO - Epoch 20 Average Loss: 1257.762433
+2024-04-30 21:43:06,717 - __main__ - INFO - Average Test Loss: 1256.430520
+2024-04-30 21:43:06,717 - __main__ - INFO - X_train shape: (75580, 60, 42)
+2024-04-30 21:43:06,718 - __main__ - INFO - X_test shape: (18896, 60, 42)
