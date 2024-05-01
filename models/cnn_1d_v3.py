@@ -29,8 +29,8 @@ class CNN1D_model(nn.Module):
         
 
     def forward(self, x):
-        x = x.reshape(x.size(0), x.size(1), -1)
-        x = x.permute(0, 2, 1)
+        # x = x.reshape(x.size(0), x.size(1), -1)
+        # x = x.permute(0, 2, 1)
     
 
         x = self.conv1(x)
